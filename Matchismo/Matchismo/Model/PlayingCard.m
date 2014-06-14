@@ -12,19 +12,44 @@
 
 -(int)match:(NSArray *)otherCards
 {
-    int score = 0;
+    NSMutableDictionary *ranks = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *suits = [[NSMutableDictionary alloc] init];
     
-    if ([otherCards count] == 1) {
-        PlayingCard *card = [otherCards firstObject];
-        if (card.rank == self.rank) {
-            score = 4;
+    int rankScore = 0;
+    int suitScore = 0;
+
+    ranks[ [NSNumber numberWithInteger:self.rank] ] = @0;
+    suits[ self.suit ] = @0;
+    
+    
+    for (PlayingCard *card in otherCards) {
+        NSNumber *numRank = [NSNumber numberWithInteger:card.rank];
+        NSNumber *rankVal = [ranks objectForKey:numRank];
+        if (rankVal) {
+            ranks[numRank] =  [NSNumber numberWithInteger:[rankVal intValue] + 1];
         }
-        else if ([card.suit isEqualToString:self.suit]) {
-            score = 1;
+        else {
+            ranks[numRank] = @0;
+        }
+
+        NSNumber *suitVal = [suits objectForKey:card.suit];
+        if (suitVal) {
+            suits[card.suit] = [NSNumber numberWithInteger:[suitVal intValue] + 1];
+        }
+        else {
+            suits[card.suit] = @0;
         }
     }
     
-    return score;
+    for (id key in ranks) {
+        rankScore += 4 * [[ranks objectForKey:key] intValue];
+    }
+    
+    for (id key in suits) {
+        suitScore += 1 * [[suits objectForKey:key] intValue];
+    }
+ 
+    return rankScore + suitScore;
 }
 
 -(NSString *)contents {

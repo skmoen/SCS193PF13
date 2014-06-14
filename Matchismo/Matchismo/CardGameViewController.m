@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *modeControl;
 
 @property (strong, nonatomic) CardMatchingGame *game;
 
@@ -26,6 +27,7 @@
 {
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                                                           usingDeck:[self createDeck]];
+    _game.cardsToMatch = [self modeValue:self.modeControl.selectedSegmentIndex];
     return _game;
 }
 
@@ -37,7 +39,23 @@
 - (IBAction)touchCardButton:(UIButton *)sender {
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game choseCardAtIndex:chosenButtonIndex];
+    self.modeControl.enabled = NO;
     [self updateUI];
+}
+
+- (IBAction)touchNewGameButton:(id)sender {
+    self.modeControl.enabled = YES;
+    self.game = nil;
+    [self updateUI];
+}
+
+-(NSUInteger)modeValue:(NSUInteger)index
+{
+    return index + 1;
+}
+
+- (IBAction)changeModeControl:(id)sender {
+    self.game.cardsToMatch = [self modeValue:self.modeControl.selectedSegmentIndex];
 }
 
 -(void)updateUI
