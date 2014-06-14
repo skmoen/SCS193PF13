@@ -35,9 +35,17 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M5M-75-8eh">
-                                <rect key="frame" x="45" y="382" width="87" height="30"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9lJ-H7-6vF">
+                                <rect key="frame" x="20" y="403" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M5M-75-8eh">
+                                <rect key="frame" x="45" y="360" width="87" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="New Game">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -395,7 +403,7 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="S75-Ge-CXJ">
-                                <rect key="frame" x="171" y="382" width="123" height="29"/>
+                                <rect key="frame" x="171" y="360" width="123" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Match 2"/>
@@ -412,6 +420,7 @@
                     <connections>
                         <outlet property="modeControl" destination="S75-Ge-CXJ" id="dK4-UI-lOq"/>
                         <outlet property="scoreLabel" destination="GgP-3l-o2c" id="OlA-kg-Tvw"/>
+                        <outlet property="statusLabel" destination="9lJ-H7-6vF" id="56h-rS-chw"/>
                         <outletCollection property="cardButtons" destination="w4Q-k4-Epa" id="2KQ-Bt-RhX"/>
                         <outletCollection property="cardButtons" destination="SRb-S8-Rws" id="9oY-RO-B9R"/>
                         <outletCollection property="cardButtons" destination="dF9-hn-9Wh" id="keH-G3-iPv"/>

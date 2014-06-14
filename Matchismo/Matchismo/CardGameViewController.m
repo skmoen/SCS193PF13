@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *modeControl;
 
 @property (strong, nonatomic) CardMatchingGame *game;
@@ -39,6 +40,7 @@
 - (IBAction)touchCardButton:(UIButton *)sender {
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game choseCardAtIndex:chosenButtonIndex];
+    self.statusLabel.text = self.game.status;
     self.modeControl.enabled = NO;
     [self updateUI];
 }

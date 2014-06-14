@@ -21,6 +21,7 @@
 -(Card*)cardAtIndex:(NSUInteger)index;
 
 @property (nonatomic, readonly) NSInteger score;
+@property (nonatomic, strong) NSString *status;
 @property (nonatomic) NSInteger cardsToMatch;
 
 @end
