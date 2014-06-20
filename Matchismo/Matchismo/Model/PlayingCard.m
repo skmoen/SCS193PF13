@@ -21,12 +21,11 @@
     ranks[ [NSNumber numberWithInteger:self.rank] ] = @0;
     suits[ self.suit ] = @0;
     
-    
     for (PlayingCard *card in otherCards) {
         NSNumber *numRank = [NSNumber numberWithInteger:card.rank];
         NSNumber *rankVal = [ranks objectForKey:numRank];
         if (rankVal) {
-            ranks[numRank] =  [NSNumber numberWithInteger:[rankVal intValue] + 1];
+            ranks[numRank] = [NSNumber numberWithInteger:[rankVal intValue] + 1];
         }
         else {
             ranks[numRank] = @0;

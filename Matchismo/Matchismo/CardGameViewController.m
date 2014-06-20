@@ -40,7 +40,6 @@
 - (IBAction)touchCardButton:(UIButton *)sender {
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game choseCardAtIndex:chosenButtonIndex];
-    self.statusLabel.text = self.game.status;
     self.modeControl.enabled = NO;
     [self updateUI];
 }
@@ -71,6 +70,7 @@
                               forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
     }
+    self.statusLabel.text = self.game.status;
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
 }
 
