@@ -7,17 +7,13 @@
 //
 
 #import "CardGameViewController.h"
-#import "Card.h"
-#import "CardMatchingGame.h"
+#import "HistoryViewController.h"
 
 @interface CardGameViewController ()
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *modeControl;
-
-@property (strong, nonatomic) CardMatchingGame *game;
 
 @end
 
@@ -27,10 +23,17 @@
 {
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                                                           usingDeck:[self createDeck]];
-    _game.cardsToMatch = [self modeValue:self.modeControl.selectedSegmentIndex];
+    _game.cardsToMatch = [[self  class] viewCardsToMatch];
     return _game;
 }
 
+// abstract
++(NSInteger)viewCardsToMatch
+{
+    return 0;
+}
+
+// abstract
 -(Deck*)createDeck
 {
     return nil;
@@ -39,12 +42,10 @@
 - (IBAction)touchCardButton:(UIButton *)sender {
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game choseCardAtIndex:chosenButtonIndex];
-    self.modeControl.enabled = NO;
     [self updateUI];
 }
 
 - (IBAction)touchNewGameButton:(id)sender {
-    self.modeControl.enabled = YES;
     self.game = nil;
     [self updateUI];
 }
@@ -52,10 +53,6 @@
 -(NSUInteger)modeValue:(NSUInteger)index
 {
     return index + 1;
-}
-
-- (IBAction)changeModeControl:(id)sender {
-    self.game.cardsToMatch = [self modeValue:self.modeControl.selectedSegmentIndex];
 }
 
 -(void)updateUI
@@ -69,7 +66,7 @@
                               forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
     }
-    self.statusLabel.text = self.game.status;
+    self.statusLabel.text = [self.game.statusHistory lastObject];
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
 }
 
@@ -81,6 +78,13 @@
 -(UIImage*)backgroundImageForCard:(Card*)card
 {
     return [UIImage imageNamed:card.isChosen ? @"cardfront" : @"cardback"];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"historySegue"]) {
+        HistoryViewController *hvc = [segue destinationViewController];
+        hvc.history = [NSArray arrayWithArray:self.game.statusHistory];
+    }
 }
 
 @end

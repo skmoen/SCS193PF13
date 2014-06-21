@@ -334,7 +334,11 @@
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="Aap-72-M3B">
-                        <barButtonItem key="rightBarButtonItem" title="History" id="ZVO-y7-eBM"/>
+                        <barButtonItem key="rightBarButtonItem" title="History" id="ZVO-y7-eBM">
+                            <connections>
+                                <segue destination="W8j-0l-6Dc" kind="push" identifier="historySegue" id="avy-fM-ZUH"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="scoreLabel" destination="GgP-3l-o2c" id="OlA-kg-Tvw"/>
@@ -368,6 +372,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1535" y="182"/>
+        </scene>
+        <!--History View Controller-->
+        <scene sceneID="PBu-Xv-Eqo">
+            <objects>
+                <viewController id="W8j-0l-6Dc" customClass="HistoryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uGb-sH-0ag"/>
+                        <viewControllerLayoutGuide type="bottom" id="gwe-HI-wbx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rdO-4u-roF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3K-aS-6rX">
+                                <rect key="frame" x="20" y="70" width="280" height="355"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wcm-Xr-LFU"/>
+                    <connections>
+                        <outlet property="statusTextView" destination="Y3K-aS-6rX" id="2dz-Ip-qbx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kw1-KI-9Lt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1972" y="182"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fu2-Vc-rJm">

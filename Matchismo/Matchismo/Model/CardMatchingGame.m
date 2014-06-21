@@ -21,6 +21,12 @@
     return _cards;
 }
 
+-(NSMutableArray*)statusHistory
+{
+    if (!_statusHistory) _statusHistory = [[NSMutableArray alloc] init];
+    return _statusHistory;
+}
+
 -(instancetype)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck
 {
     self = [super init];
@@ -53,11 +59,12 @@ static const int COST_TO_CHOOSE = 1;
 -(void)choseCardAtIndex:(NSUInteger)index
 {
     Card *card = [self cardAtIndex:index];
+    NSString *status = nil;
     
     if (!card.isMatched) {
         if (card.isChosen) {
             card.chosen = NO;
-            self.status = [NSString stringWithFormat:@"Unselected %@", card.contents];
+            status = [NSString stringWithFormat:@"Unselected %@", card.contents];
         }
         else {
             NSMutableArray *chosenCards = [[NSMutableArray alloc] init];
@@ -74,29 +81,27 @@ static const int COST_TO_CHOOSE = 1;
                             for (Card *card in chosenCards) {
                                 card.matched = YES;
                             }
-                            self.status = [NSString stringWithFormat:@"Match found: %@ %@; +%d", card.contents, chosenString, matchScore * MATCH_BONUS];
+                            status = [NSString stringWithFormat:@"Match found: %@ %@; +%d", card.contents, chosenString, matchScore * MATCH_BONUS];
                         }
                         else {
                             self.score -= MISMATCH_PENALTY;
                             for (Card *card in chosenCards) {
                                 card.chosen = NO;
                             }
-                            self.status = [NSString stringWithFormat:@"No Match: %@ %@; -%d", card.contents, chosenString, MISMATCH_PENALTY];
+                            status = [NSString stringWithFormat:@"No Match: %@ %@; -%d", card.contents, chosenString, MISMATCH_PENALTY];
                         }
                         break;
                     }
-                    else {
-                        self.status = [NSString stringWithFormat:@"Selected %@; -%d", card.contents, COST_TO_CHOOSE];
-                    }
-                }
-                else {
-                    self.status = [NSString stringWithFormat:@"Selected %@; -%d", card.contents, COST_TO_CHOOSE];
                 }
             }
             self.score -= COST_TO_CHOOSE;
             card.chosen = YES;
+            if (!status) {
+                status = [NSString stringWithFormat:@"Selected %@; -%d", card.contents, COST_TO_CHOOSE];
+            }
         }
     }
+    [self.statusHistory addObject:status];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "PlayingCardGameViewController.h"
 #import "PlayingCardDeck.h"
+#import "CardMatchingGame.h"
 
 @interface PlayingCardGameViewController ()
 
@@ -20,4 +21,9 @@
     return [[PlayingCardDeck alloc] init];
 }
 
++(NSInteger)viewCardsToMatch
+{
+    return 1;
+}
 @end
+
