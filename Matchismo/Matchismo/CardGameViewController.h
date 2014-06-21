@@ -16,5 +16,4 @@
 -(NSInteger)viewCardsToMatch;  // abstract
 -(Deck *)createDeck;  // abstract
 
-
 @end
