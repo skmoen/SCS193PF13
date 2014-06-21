@@ -21,7 +21,7 @@
     return [[PlayingCardDeck alloc] init];
 }
 
-+(NSInteger)viewCardsToMatch
+-(NSInteger)viewCardsToMatch
 {
     return 1;
 }

@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) CardMatchingGame *game;
 
-+(NSInteger)viewCardsToMatch;  // abstract
+-(NSInteger)viewCardsToMatch;  // abstract
 -(Deck *)createDeck;  // abstract
 
 

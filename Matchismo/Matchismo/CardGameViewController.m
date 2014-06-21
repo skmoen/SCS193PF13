@@ -23,12 +23,12 @@
 {
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                                                           usingDeck:[self createDeck]];
-    _game.cardsToMatch = [[self  class] viewCardsToMatch];
+    _game.cardsToMatch = [self viewCardsToMatch];
     return _game;
 }
 
 // abstract
-+(NSInteger)viewCardsToMatch
+-(NSInteger)viewCardsToMatch
 {
     return 0;
 }
