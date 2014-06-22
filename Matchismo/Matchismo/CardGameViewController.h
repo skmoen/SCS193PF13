@@ -11,6 +11,7 @@
 
 @interface CardGameViewController : UIViewController
 
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) CardMatchingGame *game;
 
 -(NSInteger)viewCardsToMatch;  // abstract

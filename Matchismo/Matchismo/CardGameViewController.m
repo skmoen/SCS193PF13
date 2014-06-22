@@ -11,7 +11,7 @@
 
 @interface CardGameViewController ()
 
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+//@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
@@ -55,7 +55,7 @@
     return index + 1;
 }
 
--(void)updateUI
+-(void)updateCards
 {
     for (UIButton *cardButton in self.cardButtons) {
         int cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
@@ -66,6 +66,17 @@
                               forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
     }
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self updateUI];
+}
+
+-(void)updateUI
+{
+    [self updateCards];
     self.statusLabel.text = [self.game.statusHistory lastObject];
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
 }
