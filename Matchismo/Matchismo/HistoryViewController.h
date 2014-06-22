@@ -10,6 +10,6 @@
 
 @interface HistoryViewController : UIViewController
 
-@property (nonatomic, strong) NSArray *history;
+@property (nonatomic, strong) NSString *history;
 
 @end

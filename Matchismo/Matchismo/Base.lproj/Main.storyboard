@@ -683,7 +683,7 @@
                     <navigationItem key="navigationItem" id="Ag9-lj-nza">
                         <barButtonItem key="rightBarButtonItem" title="History" id="MEw-Nt-Ay4">
                             <connections>
-                                <segue destination="90c-j7-s1Z" kind="push" identifier="historySegue" id="swh-0o-LaV"/>
+                                <segue destination="W8j-0l-6Dc" kind="push" identifier="historySegue" id="DXu-JQ-xGy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -718,44 +718,6 @@
             <point key="canvasLocation" x="1535" y="782"/>
         </scene>
         <!--History View Controller-->
-        <scene sceneID="umc-XF-J8g">
-            <objects>
-                <viewController id="90c-j7-s1Z" customClass="HistoryViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="n13-4B-924"/>
-                        <viewControllerLayoutGuide type="bottom" id="PuF-07-3tj"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="se1-i8-Dge">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HIH-CK-A8H">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="viE-2u-Hmz">
-                                        <rect key="frame" x="20" y="70" width="280" height="355"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="05k-GI-hCG"/>
-                    <connections>
-                        <outlet property="statusTextView" destination="viE-2u-Hmz" id="zdA-KU-skL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mNI-Ds-wYs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1972" y="782"/>
-        </scene>
-        <!--History View Controller-->
         <scene sceneID="PBu-Xv-Eqo">
             <objects>
                 <viewController id="W8j-0l-6Dc" customClass="HistoryViewController" sceneMemberID="viewController">
@@ -784,7 +746,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kw1-KI-9Lt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1972" y="182"/>
+            <point key="canvasLocation" x="2111" y="512"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fu2-Vc-rJm">
@@ -805,11 +767,11 @@
             </objects>
             <point key="canvasLocation" x="457" y="512"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller - PlayingCard-->
         <scene sceneID="Usl-SM-7Ae">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qXD-vb-l3C" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="YGa-vE-J8Q"/>
+                    <tabBarItem key="tabBarItem" title="PlayingCard" id="YGa-vE-J8Q"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YLP-Ay-WsI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -824,11 +786,11 @@
             </objects>
             <point key="canvasLocation" x="1000" y="182"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller - SetCard-->
         <scene sceneID="nnt-OK-4ML">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zef-tC-FuP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="hta-Pg-2lB"/>
+                    <tabBarItem key="tabBarItem" title="SetCard" id="hta-Pg-2lB"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iX7-KQ-k9Z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -852,4 +814,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="DXu-JQ-xGy"/>
+    </inferredMetricsTieBreakers>
 </document>

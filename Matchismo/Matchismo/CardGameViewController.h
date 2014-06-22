@@ -14,6 +14,8 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) CardMatchingGame *game;
 
++(NSString*)stringFromHistory:(NSDictionary*)history;
+
 -(NSInteger)viewCardsToMatch;  // abstract
 -(Deck *)createDeck;  // abstract
 

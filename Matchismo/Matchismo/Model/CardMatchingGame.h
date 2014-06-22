@@ -21,7 +21,7 @@
 -(Card*)cardAtIndex:(NSUInteger)index;
 
 @property (nonatomic, readonly) NSInteger score;
-@property (nonatomic, strong) NSMutableArray *statusHistory;
+@property (nonatomic, strong) NSMutableArray *statusHistory;  // {"cards": ..., "score": ...}
 @property (nonatomic) NSInteger cardsToMatch;
 
 @end

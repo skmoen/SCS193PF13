@@ -7,6 +7,7 @@
 //
 
 #import "HistoryViewController.h"
+#import "CardGameViewController.h"
 
 @interface HistoryViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *statusTextView;
@@ -17,7 +18,7 @@
 
 -(void)updateUI
 {
-    self.statusTextView.text = [[self.history valueForKey:@"description"] componentsJoinedByString:@"\n"];
+    self.statusTextView.text = self.history;
 }
 
 

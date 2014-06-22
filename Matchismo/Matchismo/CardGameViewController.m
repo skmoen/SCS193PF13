@@ -74,10 +74,27 @@
     [self updateUI];
 }
 
++(NSString*)stringFromHistory:(NSDictionary*)history
+{
+    if (![history objectForKey:@"cards"]) return @"";
+    
+    int score = [[history objectForKey:@"score"] intValue];
+    NSMutableString *status = (NSMutableString*)[[[history objectForKey:@"cards"] valueForKey:@"contents"] componentsJoinedByString:@","];
+    if (score > 0) {
+        [status appendFormat:@" matched! +%d", score];
+    }
+    else if (score <0) {
+        [status appendFormat:@" didn't match! %d", score];
+    }
+    return [NSString stringWithFormat:@"%@; %d",
+            [[[history objectForKey:@"cards"] valueForKey:@"contents"] componentsJoinedByString:@","], score];
+            
+}
+
 -(void)updateUI
 {
     [self updateCards];
-    self.statusLabel.text = [self.game.statusHistory lastObject];
+    self.statusLabel.text = [[self class] stringFromHistory:[self.game.statusHistory lastObject]];  // [self.game.statusHistory lastObject];
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
 }
 
@@ -94,7 +111,11 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"historySegue"]) {
         HistoryViewController *hvc = [segue destinationViewController];
-        hvc.history = [NSArray arrayWithArray:self.game.statusHistory];
+        NSMutableString *history = [[NSMutableString alloc] init];
+        for (id item in self.game.statusHistory) {
+            [history appendFormat:@"%@\n",[[self class] stringFromHistory:item]];
+        }
+        hvc.history = history;
     }
 }
 
