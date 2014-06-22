@@ -32,7 +32,6 @@
     
     int score = [[history objectForKey:@"score"] intValue];
     NSMutableAttributedString *status = [[NSMutableAttributedString alloc] initWithString:@"("];
-//    [status appendAttributedString:[[NSAttributedString alloc] initWithString:[[[history objectForKey:@"cards"] valueForKey:@"contents"] componentsJoinedByString:@","]]];
     for (SetCard* card in [history objectForKey:@"cards"]) {
         [status appendAttributedString:[self attributedStringFromCard:card]];
         [status appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" "]]];
