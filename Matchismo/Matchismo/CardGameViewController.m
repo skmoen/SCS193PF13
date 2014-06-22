@@ -50,11 +50,6 @@
     [self updateUI];
 }
 
--(NSUInteger)modeValue:(NSUInteger)index
-{
-    return index + 1;
-}
-
 -(void)updateCards
 {
     for (UIButton *cardButton in self.cardButtons) {
@@ -74,27 +69,34 @@
     [self updateUI];
 }
 
-+(NSString*)stringFromHistory:(NSDictionary*)history
+-(NSAttributedString*)attributedStringFromHistory:(NSDictionary*)history
 {
-    if (![history objectForKey:@"cards"]) return @"";
+    if (![history objectForKey:@"cards"]) return [[NSAttributedString alloc] init];
     
     int score = [[history objectForKey:@"score"] intValue];
-    NSMutableString *status = (NSMutableString*)[[[history objectForKey:@"cards"] valueForKey:@"contents"] componentsJoinedByString:@","];
+    NSMutableAttributedString *status = [[NSMutableAttributedString alloc] initWithString:@"("];
+    [status appendAttributedString:[[NSAttributedString alloc] initWithString:[[[history objectForKey:@"cards"] valueForKey:@"contents"] componentsJoinedByString:@" "]]];
+    [status appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@")"]]];
+    
     if (score > 0) {
-        [status appendFormat:@" matched! +%d", score];
+        [status appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" matched! +%d", score]]];
     }
-    else if (score <0) {
-        [status appendFormat:@" didn't match! %d", score];
+    else if (score < 0 ) {
+        if ([[history objectForKey:@"cards"] count] > 1) {
+            [status appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" didn't match! %d", score]]];
+        }
+        else {
+            [status appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" selected. %d", score]]];
+        }
     }
-    return [NSString stringWithFormat:@"%@; %d",
-            [[[history objectForKey:@"cards"] valueForKey:@"contents"] componentsJoinedByString:@","], score];
-            
+    
+    return status;
 }
 
 -(void)updateUI
 {
     [self updateCards];
-    self.statusLabel.text = [[self class] stringFromHistory:[self.game.statusHistory lastObject]];  // [self.game.statusHistory lastObject];
+    self.statusLabel.attributedText = [self attributedStringFromHistory:[self.game.statusHistory lastObject]];
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
 }
 
@@ -111,9 +113,13 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"historySegue"]) {
         HistoryViewController *hvc = [segue destinationViewController];
-        NSMutableString *history = [[NSMutableString alloc] init];
+        NSMutableAttributedString *history = [[NSMutableAttributedString alloc] init];
+        int count = 1;
         for (id item in self.game.statusHistory) {
-            [history appendFormat:@"%@\n",[[self class] stringFromHistory:item]];
+            [history appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d. ", count]]];
+            [history appendAttributedString:[self attributedStringFromHistory:item]];
+            [history appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n"]]];
+            count++;
         }
         hvc.history = history;
     }

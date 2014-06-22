@@ -18,7 +18,7 @@
 
 -(void)updateUI
 {
-    self.statusTextView.text = self.history;
+    self.statusTextView.attributedText = self.history;
 }
 
 
