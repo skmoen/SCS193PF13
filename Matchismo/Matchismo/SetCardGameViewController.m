@@ -13,7 +13,6 @@
 
 @interface SetCardGameViewController ()
 @property (weak, nonatomic) IBOutlet SetCardView *setCardView;
-
 @end
 
 @implementation SetCardGameViewController
@@ -32,15 +31,6 @@
 
 - (IBAction)tappedCard:(UITapGestureRecognizer *)sender {
     [self drawRandomPlayingCard];
-}
-
--(void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.setCardView.number = 1;
-    self.setCardView.color = 1;
-    self.setCardView.symbol = 1;
-    self.setCardView.shading = 1;
 }
 
 -(Deck *)createDeck

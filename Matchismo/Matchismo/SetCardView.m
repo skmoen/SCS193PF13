@@ -61,12 +61,15 @@
 
 #pragma mark - Drawing
 
-#define CORNER_FONT_STANDARD_HEIGHT 180.0
-#define CORNER_RADIUS 12.0
+#define CORNER_RADIUS 16.0
+#define SIDE_SPACE 10.0
+#define SYMBOL_HEIGHT 40.0
+#define STANDARD_VIEW_HEIGHT 240.0
 
-- (CGFloat)cornerScaleFactor { return self.bounds.size.height / CORNER_FONT_STANDARD_HEIGHT; }
-- (CGFloat)cornerRadius { return CORNER_RADIUS * [self cornerScaleFactor]; }
-- (CGFloat)cornerOffset { return [self cornerRadius] / 3.0; }
+-(CGFloat)scaleFactor { return self.bounds.size.height / STANDARD_VIEW_HEIGHT; }
+-(CGFloat)cornerRadius { return CORNER_RADIUS * [self scaleFactor]; }
+-(CGFloat)sideSpace { return SIDE_SPACE * [self scaleFactor]; }
+-(CGFloat)symbolHeight { return SYMBOL_HEIGHT * [self scaleFactor]; }
 
 - (void)drawRect:(CGRect)rect
 {
@@ -94,43 +97,47 @@
         [[UIColor blueColor] setStroke];
     }
     
+    CGPoint symbolShape = CGPointMake(self.bounds.size.width - [self symbolHeight]/2, [self symbolHeight]);
+    
     if (self.number == 0 || self.number == 2) {
         [self drawSymbol:self.symbol
              withShading:self.shading
-                  inRect:CGRectMake(10,
-                                    self.bounds.size.height/2-20,
-                                    self.bounds.size.width-20,
-                                    40)];
+                  inRect:CGRectMake([self sideSpace],
+                                    self.bounds.size.height/2 - 2*[self sideSpace],
+                                    symbolShape.x,
+                                    symbolShape.y)];
     }
     if (self.number == 2) {
+        int offset = self.bounds.size.height * 0.125;
         [self drawSymbol:self.symbol
              withShading:self.shading
-                  inRect:CGRectMake(10,
-                                    30,
-                                    self.bounds.size.width-20,
-                                    40)];
+                  inRect:CGRectMake([self sideSpace],
+                                    offset,
+                                    symbolShape.x,
+                                    symbolShape.y)];
 
         [self drawSymbol:self.symbol
              withShading:self.shading
-                  inRect:CGRectMake(10,
-                                    self.bounds.origin.y + self.bounds.size.height - 70,
-                                    self.bounds.size.width - 20,
-                                    40)];
+                  inRect:CGRectMake([self sideSpace],
+                                    self.bounds.size.height - [self symbolHeight] - offset,
+                                    symbolShape.x,
+                                    symbolShape.y)];
  
     }
     if (self.number == 1) {
+        int offset = self.bounds.size.height * 0.25;
         [self drawSymbol:self.symbol
              withShading:self.shading
-                  inRect:CGRectMake(10,
-                                    60,
-                                    self.bounds.size.width-20,
-                                    40)];
+                  inRect:CGRectMake([self sideSpace],
+                                    offset,
+                                    symbolShape.x,
+                                    symbolShape.y)];
         [self drawSymbol:self.symbol
              withShading:self.shading
-                  inRect:CGRectMake(10,
-                                    self.bounds.size.height-100,
-                                    self.bounds.size.width-20,
-                                    40)];
+                  inRect:CGRectMake([self sideSpace],
+                                    self.bounds.size.height - [self symbolHeight] - offset,
+                                    symbolShape.x,
+                                    symbolShape.y)];
     }
 }
 
@@ -161,24 +168,25 @@
     }
     else if (symbol == 2) {
         path = [[UIBezierPath alloc] init];
-        CGPoint start = CGPointMake(rect.origin.x + 10, rect.origin.y + rect.size.height);
-        CGPoint end = CGPointMake(rect.origin.x + rect.size.width - 10, rect.origin.y);
+        CGPoint start = CGPointMake(rect.origin.x + 10*[self scaleFactor],
+                                    rect.origin.y + rect.size.height);
+        CGPoint end = CGPointMake(rect.origin.x + rect.size.width - 10*[self scaleFactor], rect.origin.y);
         [path moveToPoint:start];
         [path addCurveToPoint:end
-                controlPoint1:CGPointMake(start.x - 30, start.y - 80)
-                controlPoint2:CGPointMake(end.x - 20, end.y + 40)];
+                controlPoint1:CGPointMake(start.x - 30*[self scaleFactor], start.y - 80*[self scaleFactor])
+                controlPoint2:CGPointMake(end.x - 20*[self scaleFactor], end.y + 40*[self scaleFactor])];
         [path addCurveToPoint:start
-                controlPoint1:CGPointMake(end.x + 30, end.y + 80)
-                controlPoint2:CGPointMake(start.x + 20, start.y - 40)];
+                controlPoint1:CGPointMake(end.x + 30*[self scaleFactor], end.y + 80*[self scaleFactor])
+                controlPoint2:CGPointMake(start.x + 20*[self scaleFactor], start.y - 40*[self scaleFactor])];
     }
-    path.lineWidth = 3;
+    path.lineWidth = 3*[self scaleFactor];
     [path addClip];
     [path stroke];
 
     if (shading == 1) {
         UIBezierPath *stripes = [[UIBezierPath alloc] init];
-        stripes.lineWidth = 0.7;
-        for (int i = 5; i < rect.size.width; i+= 5 ) {
+        stripes.lineWidth = 0.7*[self scaleFactor];
+        for (int i = 4; i < rect.size.width; i+= 4 ) {
             [stripes moveToPoint:CGPointMake(i + rect.origin.x - 2, rect.origin.y)];
             [stripes addLineToPoint:CGPointMake(i + rect.origin.x + 2, rect.size.height + rect.origin.y)];
         }

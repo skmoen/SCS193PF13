@@ -101,7 +101,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DSf-rT-kqQ" customClass="SetCardView">
-                                        <rect key="frame" x="80" y="63" width="160" height="240"/>
+                                        <rect key="frame" x="80" y="63" width="67" height="91"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
