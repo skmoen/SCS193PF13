@@ -94,24 +94,57 @@
         [[UIColor blueColor] setStroke];
     }
     
-    [self drawSymbol:self.symbol
-        withShading:self.shading
-             inRect:CGRectMake(10,
-                               10,
-                               self.bounds.size.width-20,
-                               40)];
-    
-    NSLog(@"%f, %f, %f, %f",
-          self.bounds.origin.x,
-          self.bounds.origin.y,
-          self.bounds.size.width,
-          self.bounds.size.height);
+    if (self.number == 0 || self.number == 2) {
+        [self drawSymbol:self.symbol
+             withShading:self.shading
+                  inRect:CGRectMake(10,
+                                    self.bounds.size.height/2-20,
+                                    self.bounds.size.width-20,
+                                    40)];
+    }
+    if (self.number == 2) {
+        [self drawSymbol:self.symbol
+             withShading:self.shading
+                  inRect:CGRectMake(10,
+                                    30,
+                                    self.bounds.size.width-20,
+                                    40)];
+
+        [self drawSymbol:self.symbol
+             withShading:self.shading
+                  inRect:CGRectMake(10,
+                                    self.bounds.origin.y + self.bounds.size.height - 70,
+                                    self.bounds.size.width - 20,
+                                    40)];
+ 
+    }
+    if (self.number == 1) {
+        [self drawSymbol:self.symbol
+             withShading:self.shading
+                  inRect:CGRectMake(10,
+                                    60,
+                                    self.bounds.size.width-20,
+                                    40)];
+        [self drawSymbol:self.symbol
+             withShading:self.shading
+                  inRect:CGRectMake(10,
+                                    self.bounds.size.height-100,
+                                    self.bounds.size.width-20,
+                                    40)];
+    }
 }
 
 -(void)drawSymbol:(NSUInteger)symbol
      withShading:(NSUInteger)shading
           inRect:(CGRect)rect
 {
+    CGContextRef contextRef = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(contextRef);
+    /*
+    UIBezierPath *debug = [UIBezierPath bezierPathWithRect:rect];
+    debug.lineWidth = 0.5;
+    [debug stroke];
+     */
     UIBezierPath *path;
     int midx = rect.origin.x + (rect.size.width/2);
     int midy = rect.origin.y + (rect.size.height/2);
@@ -128,11 +161,20 @@
     }
     else if (symbol == 2) {
         path = [[UIBezierPath alloc] init];
+        CGPoint start = CGPointMake(rect.origin.x + 10, rect.origin.y + rect.size.height);
+        CGPoint end = CGPointMake(rect.origin.x + rect.size.width - 10, rect.origin.y);
+        [path moveToPoint:start];
+        [path addCurveToPoint:end
+                controlPoint1:CGPointMake(start.x - 30, start.y - 80)
+                controlPoint2:CGPointMake(end.x - 20, end.y + 40)];
+        [path addCurveToPoint:start
+                controlPoint1:CGPointMake(end.x + 30, end.y + 80)
+                controlPoint2:CGPointMake(start.x + 20, start.y - 40)];
     }
     path.lineWidth = 3;
     [path addClip];
     [path stroke];
-    
+
     if (shading == 1) {
         UIBezierPath *stripes = [[UIBezierPath alloc] init];
         stripes.lineWidth = 0.7;
@@ -141,10 +183,12 @@
             [stripes addLineToPoint:CGPointMake(i + rect.origin.x + 2, rect.size.height + rect.origin.y)];
         }
         [stripes stroke];
+        
     }
     else if (shading == 2) {
         [path fill];
     }
+    CGContextRestoreGState(contextRef);
 }
 
 @end

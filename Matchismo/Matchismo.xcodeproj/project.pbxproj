@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A11E540195F5F08008A2BAD /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11E53F195F5F08008A2BAD /* Grid.m */; };
 		3A1AD08B194BE90400B7B00B /* CardMatchingGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1AD08A194BE90400B7B00B /* CardMatchingGame.m */; };
 		3AA58604195DE26200AD683C /* PlayingCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA58603195DE26200AD683C /* PlayingCardView.m */; };
 		3AA58607195DF4B800AD683C /* SetCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA58606195DF4B800AD683C /* SetCardView.m */; };
@@ -46,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A11E53E195F5F08008A2BAD /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
+		3A11E53F195F5F08008A2BAD /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid.m; sourceTree = "<group>"; };
 		3A1AD089194BE90400B7B00B /* CardMatchingGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardMatchingGame.h; path = Model/CardMatchingGame.h; sourceTree = "<group>"; };
 		3A1AD08A194BE90400B7B00B /* CardMatchingGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardMatchingGame.m; path = Model/CardMatchingGame.m; sourceTree = "<group>"; };
 		3AA58602195DE26200AD683C /* PlayingCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCardView.h; sourceTree = "<group>"; };
@@ -185,6 +188,8 @@
 				3AA58606195DF4B800AD683C /* SetCardView.m */,
 				3AA58602195DE26200AD683C /* PlayingCardView.h */,
 				3AA58603195DE26200AD683C /* PlayingCardView.m */,
+				3A11E53E195F5F08008A2BAD /* Grid.h */,
+				3A11E53F195F5F08008A2BAD /* Grid.m */,
 				79658CB31948188A00ACADD8 /* Model */,
 				79658C9319480C6800ACADD8 /* Images.xcassets */,
 				79658C8219480C6800ACADD8 /* Supporting Files */,
@@ -341,6 +346,7 @@
 				3AA58604195DE26200AD683C /* PlayingCardView.m in Sources */,
 				3AA58607195DF4B800AD683C /* SetCardView.m in Sources */,
 				79658C8819480C6800ACADD8 /* main.m in Sources */,
+				3A11E540195F5F08008A2BAD /* Grid.m in Sources */,
 				3AA58610195E0E3A00AD683C /* AttributeCounter.m in Sources */,
 				79658CB619481A6B00ACADD8 /* PlayingCard.m in Sources */,
 				3A1AD08B194BE90400B7B00B /* CardMatchingGame.m in Sources */,
