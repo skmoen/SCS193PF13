@@ -15,10 +15,10 @@
     self = [super init];
         
     if (self) {
-        for (NSUInteger number = [SetCard minNumber]; number <= [SetCard maxNumber]; number++) {
-            for (NSString *symbol in [SetCard validSymbols]) {
-                for (NSString *shading in [SetCard validShadings]) {
-                    for (NSString *color in [SetCard validColors]) {
+        for (NSUInteger number = 0; number <= [SetCard maxValue]; number++) {
+            for (NSUInteger symbol = 0; symbol <= [SetCard maxValue]; symbol++) {
+                for (NSUInteger shading = 0; shading <= [SetCard maxValue]; shading++) {
+                    for (NSUInteger color = 0; color <= [SetCard maxValue]; color++) {
                         SetCard *card = [[SetCard alloc] init];
                         card.number = number;
                         card.symbol = symbol;
@@ -29,8 +29,7 @@
                 }
             }
         }
-    }
-    
+    }    
     
     return self;
 }
