@@ -18,12 +18,28 @@
 
 @implementation SetCardGameViewController
 
+- (void)drawRandomPlayingCard
+{
+    Card *card = [[self createDeck] drawRandomCard];
+    if ([card isKindOfClass:[SetCard class]]) {
+        SetCard *setCard = (SetCard*)card;
+        self.setCardView.number = setCard.number;
+        self.setCardView.shading = setCard.shading;
+        self.setCardView.color = setCard.color;
+        self.setCardView.symbol = setCard.symbol;
+    }
+}
+
+- (IBAction)tappedCard:(UITapGestureRecognizer *)sender {
+    [self drawRandomPlayingCard];
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
     self.setCardView.number = 1;
     self.setCardView.color = 1;
-    self.setCardView.shape = 1;
+    self.setCardView.symbol = 1;
     self.setCardView.shading = 1;
 }
 

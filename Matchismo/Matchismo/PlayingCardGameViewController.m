@@ -34,13 +34,6 @@
     self.playingCardView.faceUp = !self.playingCardView.faceUp;
 }
 
--(void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.playingCardView.rank = 13;
-    self.playingCardView.suit = @"♥︎";
-}
-
 -(Deck *)createDeck
 {
     return [[PlayingCardDeck alloc] init];

@@ -63,7 +63,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1535" y="182"/>
+            <point key="canvasLocation" x="1051" y="426"/>
         </scene>
         <!--Set Card Game View Controller - Item-->
         <scene sceneID="IGL-Kb-YZN">
@@ -104,6 +104,10 @@
                                         <rect key="frame" x="80" y="63" width="160" height="240"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="VMr-ot-20F" appends="YES" id="fVb-Uc-Wdv"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -121,8 +125,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eau-mY-Xls" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="VMr-ot-20F">
+                    <connections>
+                        <action selector="tappedCard:" destination="2Vp-sC-3bg" id="kTB-b5-1qm"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1535" y="782"/>
+            <point key="canvasLocation" x="1051" y="1026"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fu2-Vc-rJm">
@@ -141,7 +150,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0s-36-Lza" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="993" y="500"/>
+            <point key="canvasLocation" x="509" y="744"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

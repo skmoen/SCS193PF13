@@ -42,7 +42,8 @@
 {
     int count = 0;
     for (id key in self.counter) {
-        count += [[self.counter objectForKey:key] intValue];
+        int val = [[self.counter objectForKey:key] intValue];
+        count += val * val;
     }
     return count;
 }

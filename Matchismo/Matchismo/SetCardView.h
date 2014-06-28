@@ -11,7 +11,7 @@
 @interface SetCardView : UIView
 
 @property (nonatomic) NSUInteger number;
-@property (nonatomic) NSUInteger shape;
+@property (nonatomic) NSUInteger symbol;
 @property (nonatomic) NSUInteger color;
 @property (nonatomic) NSUInteger shading;
 
