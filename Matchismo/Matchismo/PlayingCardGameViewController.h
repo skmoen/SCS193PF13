@@ -7,7 +7,10 @@
 //
 
 #import "CardGameViewController.h"
+#import "PlayingCardDeck.h"
 
 @interface PlayingCardGameViewController : CardGameViewController
+
+//@property (nonatomic, strong) PlayingCardDeck *deck;
 
 @end

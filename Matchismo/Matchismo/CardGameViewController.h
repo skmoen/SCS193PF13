@@ -8,12 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "CardMatchingGame.h"
+#import "Grid.h"
 
 @interface CardGameViewController : UIViewController
 
 @property (strong, nonatomic) CardMatchingGame *game;
+@property (strong, nonatomic) Deck *deck;
 
--(NSInteger)viewCardsToMatch;  // abstract
--(Deck *)createDeck;  // abstract
+@property (nonatomic) NSUInteger cardCount;
+@property (nonatomic) NSUInteger cardsToMatch;
+
+@property (strong, nonatomic) Grid *grid;
+
+-(UIView*)viewWithCard:(Card*)card inFrame:(CGRect)frame;
 
 @end

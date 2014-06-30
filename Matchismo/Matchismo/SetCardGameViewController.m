@@ -12,13 +12,43 @@
 #import "SetCardView.h"
 
 @interface SetCardGameViewController ()
-@property (weak, nonatomic) IBOutlet SetCardView *setCardView;
 @end
 
 @implementation SetCardGameViewController
 
+@synthesize deck = _deck;
+
+-(Deck*)deck
+{
+    if (!_deck) _deck = [[SetCardDeck alloc] init];
+    return _deck;
+}
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.cardCount = 12;
+    self.grid.minimumNumberOfCells = self.cardCount;
+    self.cardsToMatch = 3;
+}
+
+-(UIView*)viewWithCard:(Card*)card inFrame:(CGRect)frame
+{
+    if ( !([card isKindOfClass:[SetCard class]]) ) return nil;
+    
+    SetCard *setCard = (SetCard*)card;
+    SetCardView *view = [[SetCardView alloc] initWithFrame:frame];
+    view.number = setCard.number;
+    view.symbol = setCard.symbol;
+    view.color = setCard.color;
+    view.shading = setCard.shading;
+    
+    return view;
+}
+
 - (void)drawRandomPlayingCard
 {
+    /*
     Card *card = [[self createDeck] drawRandomCard];
     if ([card isKindOfClass:[SetCard class]]) {
         SetCard *setCard = (SetCard*)card;
@@ -27,20 +57,7 @@
         self.setCardView.color = setCard.color;
         self.setCardView.symbol = setCard.symbol;
     }
-}
-
-- (IBAction)tappedCard:(UITapGestureRecognizer *)sender {
-    [self drawRandomPlayingCard];
-}
-
--(Deck *)createDeck
-{
-    return [[SetCardDeck alloc] init];
-}
-
--(NSInteger)viewCardsToMatch
-{
-    return 2;
+     */
 }
 
 @end

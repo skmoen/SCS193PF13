@@ -11,37 +11,53 @@
 #import "PlayingCard.h"
 #import "CardMatchingGame.h"
 #import "PlayingCardView.h"
+#import "Grid.h"
 
 @interface PlayingCardGameViewController ()
-@property (weak, nonatomic) IBOutlet PlayingCardView *playingCardView;
-
 @end
 
 @implementation PlayingCardGameViewController
 
+@synthesize deck = _deck;
+
+-(Deck*)deck
+{
+    if (!_deck) _deck = [[PlayingCardDeck alloc] init];
+    return _deck;
+}
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.cardCount = 24;
+    self.grid.minimumNumberOfCells = self.cardCount;
+    self.cardsToMatch = 2;
+}
+
+-(UIView*)viewWithCard:(Card*)card inFrame:(CGRect)frame
+{
+    if ( !([card isKindOfClass:[PlayingCard class]]) ) return nil;
+    
+    PlayingCard *playingCard = (PlayingCard*)card;
+    PlayingCardView *view = [[PlayingCardView alloc] initWithFrame:frame];
+    view.rank = playingCard.rank;
+    view.suit = playingCard.suit;
+    view.faceUp = YES;
+
+    return view;
+}
+
 - (void)drawRandomPlayingCard
 {
+    /*
     Card *card = [[self createDeck] drawRandomCard];
     if ([card isKindOfClass:[PlayingCard class]]) {
         PlayingCard *playingCard = (PlayingCard *)card;
         self.playingCardView.rank = playingCard.rank;
         self.playingCardView.suit = playingCard.suit;
     }
+     */
 }
 
-- (IBAction)tappedCard:(UITapGestureRecognizer *)sender {
-    if (!self.playingCardView.faceUp) [self drawRandomPlayingCard];
-    self.playingCardView.faceUp = !self.playingCardView.faceUp;
-}
-
--(Deck *)createDeck
-{
-    return [[PlayingCardDeck alloc] init];
-}
-
--(NSInteger)viewCardsToMatch
-{
-    return 1;
-}
 @end
 
