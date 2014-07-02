@@ -27,8 +27,8 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.cardCount = 12;
-    self.grid.minimumNumberOfCells = self.cardCount;
+    self.cardsToDeal = 12;
+    self.grid.minimumNumberOfCells = self.cardsToDeal;
     self.cardsToMatch = 3;
 }
 

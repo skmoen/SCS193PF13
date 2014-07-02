@@ -29,9 +29,9 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.cardCount = 24;
-    self.grid.minimumNumberOfCells = self.cardCount;
-    self.cardsToMatch = 2;
+    self.cardsToMatch = 1;
+    self.cardsToDeal = 24;
+    self.grid.minimumNumberOfCells = self.cardsToDeal;
 }
 
 -(UIView*)viewWithCard:(Card*)card inFrame:(CGRect)frame
@@ -42,9 +42,22 @@
     PlayingCardView *view = [[PlayingCardView alloc] initWithFrame:frame];
     view.rank = playingCard.rank;
     view.suit = playingCard.suit;
-    view.faceUp = YES;
 
     return view;
+}
+
+-(void)updateView:(UIView *)view withCard:(Card *)card
+{
+    PlayingCardView *cardView = (PlayingCardView*)view;
+    if ( cardView.faceUp != card.isChosen ) {
+        [UIView transitionWithView:cardView
+                          duration:0.2
+                           options:card.isChosen ? UIViewAnimationOptionTransitionFlipFromLeft : UIViewAnimationOptionTransitionFlipFromRight
+                        animations:^(void){
+                            cardView.faceUp = card.isChosen;
+                        }
+                        completion:nil];
+    }
 }
 
 - (void)drawRandomPlayingCard

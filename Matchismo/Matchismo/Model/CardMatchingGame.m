@@ -101,4 +101,9 @@ static const int COST_TO_CHOOSE = 1;
     [self.statusHistory addObject:history];
 }
 
+-(NSUInteger)cardsInPlay
+{
+    return [self.cards count];
+}
+
 @end

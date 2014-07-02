@@ -15,11 +15,12 @@
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) Deck *deck;
 
-@property (nonatomic) NSUInteger cardCount;
 @property (nonatomic) NSUInteger cardsToMatch;
+@property (nonatomic) NSUInteger cardsToDeal;
 
 @property (strong, nonatomic) Grid *grid;
 
 -(UIView*)viewWithCard:(Card*)card inFrame:(CGRect)frame;
+-(void)updateView:(UIView*)view withCard:(Card*)card;
 
 @end

@@ -19,6 +19,7 @@
 
 -(void)choseCardAtIndex:(NSUInteger)index;
 -(Card*)cardAtIndex:(NSUInteger)index;
+-(NSUInteger)cardsInPlay;
 
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *statusHistory;  // {"cards": ..., "score": ...}
