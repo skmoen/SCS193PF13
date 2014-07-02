@@ -36,6 +36,12 @@
     [self setNeedsDisplay];
 }
 
+-(void)setSelected:(BOOL)selected
+{
+    _selected = selected;
+    [self setNeedsDisplay];
+}
+
 #pragma mark - Initialization
 
 - (void)setup
@@ -80,7 +86,13 @@
     [[UIColor whiteColor] setFill];
     UIRectFill(self.bounds);
     
-    [[UIColor blackColor] setStroke];
+    if ( self.selected ) {
+        [[UIColor orangeColor] setStroke];
+        roundedRect.lineWidth = CORNER_RADIUS * [self scaleFactor];
+    }
+    else {
+        [[UIColor blackColor] setStroke];
+    }
     [roundedRect stroke];
     
     
@@ -179,7 +191,7 @@
                 controlPoint1:CGPointMake(end.x + 30*[self scaleFactor], end.y + 80*[self scaleFactor])
                 controlPoint2:CGPointMake(start.x + 20*[self scaleFactor], start.y - 40*[self scaleFactor])];
     }
-    path.lineWidth = 3*[self scaleFactor];
+    path.lineWidth = 5*[self scaleFactor];
     [path addClip];
     [path stroke];
 

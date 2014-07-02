@@ -11,6 +11,7 @@
 @interface CardMatchingGame()
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *cards; // of Card
+@property (nonatomic, strong) Deck* deck;
 @end
 
 @implementation CardMatchingGame
@@ -31,9 +32,11 @@
 {
     self = [super init];
     
+    self.deck = deck;
+    
     if (self) {
         for (int i = 0; i < count; i++) {
-            Card *card = [deck drawRandomCard];
+            Card *card = [self.deck drawRandomCard];
             if (card) {
                 [self.cards addObject:card];
             }

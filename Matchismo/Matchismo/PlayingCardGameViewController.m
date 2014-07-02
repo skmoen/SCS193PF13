@@ -58,6 +58,12 @@
                         }
                         completion:nil];
     }
+    if ( card.isMatched && cardView.alpha == 1 ) {
+        [UIView animateWithDuration:0.5
+                         animations:^(void){
+                             cardView.alpha = 0.5;
+                         }];
+    }
 }
 
 - (void)drawRandomPlayingCard
