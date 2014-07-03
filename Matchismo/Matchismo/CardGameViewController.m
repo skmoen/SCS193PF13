@@ -32,12 +32,9 @@
 -(Grid*)grid
 {
     if (!_grid) _grid = [[Grid alloc] init];
-    // required
     _grid.size = self.cardTableView.frame.size;
-    _grid.cellAspectRatio = 2.0/3.0;
-    _grid.minimumNumberOfCells = self.game.cardsInPlay;
-    _grid.minCellHeight = 3;
-    _grid.minCellWidth = 2;
+    _grid.cellAspectRatio = 2.0/3;
+    _grid.minimumNumberOfCells = [self.game cardsInPlay];
     return _grid.inputsAreValid ? _grid : nil;
 }
 
