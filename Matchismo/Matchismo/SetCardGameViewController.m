@@ -30,6 +30,7 @@
     self.cardsToDeal = 12;
     self.grid.minimumNumberOfCells = self.cardsToDeal;
     self.cardsToMatch = 2;
+    self.removeMatched = YES;
 }
 
 -(UIView*)viewWithCard:(Card*)card inFrame:(CGRect)frame
@@ -58,6 +59,19 @@
     }
     
     cardView.selected = setCard.isChosen;
+}
+
+-(BOOL)card:(Card*)card isRepresentedByView:(UIView*)view
+{
+    SetCardView *cardView = (SetCardView*)view;
+    SetCard *setCard = (SetCard*)card;
+
+    if (setCard.number != cardView.number) return NO;
+    if (setCard.symbol != cardView.symbol) return NO;
+    if (setCard.color != cardView.color) return NO;
+    if (setCard.shading != cardView.shading) return NO;
+    
+    return YES;
 }
 
 - (void)drawRandomPlayingCard

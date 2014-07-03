@@ -17,10 +17,12 @@
 
 @property (nonatomic) NSUInteger cardsToMatch;
 @property (nonatomic) NSUInteger cardsToDeal;
+@property (nonatomic) BOOL removeMatched;
 
 @property (strong, nonatomic) Grid *grid;
 
 -(UIView*)viewWithCard:(Card*)card inFrame:(CGRect)frame;
+-(BOOL)card:(Card*)card isRepresentedByView:(UIView*)cardView;
 -(void)updateView:(UIView*)view withCard:(Card*)card;
 
 @end

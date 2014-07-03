@@ -23,6 +23,7 @@
     [super viewDidLoad];
     self.cardsToMatch = 0;
     self.cardsToDeal = 1;
+    self.removeMatched = NO;
     self.cardTableView.backgroundColor = nil;
 }
 
@@ -45,6 +46,7 @@
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:self.cardsToDeal
                                                           usingDeck:self.deck];
     _game.cardsToMatch = self.cardsToMatch;
+    _game.removeMatched = self.removeMatched;
     return _game;
 }
 
@@ -137,7 +139,11 @@ static const CGPoint offscreenDeckPoint = { 500, 500 };
 {
     
 }
-             
+
+-(BOOL)card:(Card*)card isRepresentedByView:(UIView*)cardView
+{
+    return YES;
+}
 
 -(void)updateUI
 {

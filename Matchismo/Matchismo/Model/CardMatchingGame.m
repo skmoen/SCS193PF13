@@ -10,6 +10,7 @@
 
 @interface CardMatchingGame()
 @property (nonatomic, readwrite) NSInteger score;
+@property (nonatomic) NSUInteger cardCount;
 @property (nonatomic, strong) NSMutableArray *cards; // of Card
 @property (nonatomic, strong) Deck* deck;
 @end
@@ -35,24 +36,36 @@
     self.deck = deck;
     
     if (self) {
-        for (int i = 0; i < count; i++) {
-            Card *card = [self.deck drawRandomCard];
-            if (card) {
-                [self.cards addObject:card];
-            }
-            else {
-                self = nil;
-                break;
-            }
-        }
+        self.removeMatched = NO;
+        self.cardCount = count;
+        [self drawCardsToCount];
     }
     
     return self;
 }
 
+-(void)drawCardsToCount
+{
+    while ([self.cards count] < self.cardCount) {
+        Card *card = [self.deck drawRandomCard];
+        if (card) {
+            [self.cards addObject:card];
+        }
+        else {
+            break;
+        }
+    }
+}
+
 -(Card*)cardAtIndex:(NSUInteger)index
 {
+    [self drawCardsToCount];
     return index<[self.cards count] ? self.cards[index] : nil;
+}
+
+-(void)drawNewCardAtIndex:(NSUInteger)index
+{
+    self.cards[index] = [self.deck drawRandomCard];
 }
 
 static const int MISMATCH_PENALTY = 2;

@@ -24,5 +24,6 @@
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *statusHistory;  // {"cards": ..., "score": ...}
 @property (nonatomic) NSInteger cardsToMatch;
+@property (nonatomic) BOOL removeMatched;
 
 @end
