@@ -54,11 +54,14 @@
     cardView.selected = setCard.isChosen;
 }
 
--(BOOL)card:(Card*)card isRepresentedByView:(UIView*)view
+-(BOOL)doesView:(UIView*)view representCard:(Card*)card
 {
+    if (![view isKindOfClass:[SetCardView class]]) return NO;
+    if (![card isKindOfClass:[SetCard class]]) return NO;
+    
     SetCardView *cardView = (SetCardView*)view;
     SetCard *setCard = (SetCard*)card;
-
+    
     if (setCard.number != cardView.number) return NO;
     if (setCard.symbol != cardView.symbol) return NO;
     if (setCard.color != cardView.color) return NO;

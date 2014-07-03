@@ -93,15 +93,24 @@ static const int COST_TO_CHOOSE = 1;
                         int matchScore = [card match:chosenCards];
                         if (matchScore) {
                             scoreChange += matchScore * MATCH_BONUS;
-                            card.matched = YES;
-                            for (Card *card in chosenCards) {
+                            if (self.removeMatched) {
+                                [self.cards removeObject:card];
+                                for (Card *otherCard in chosenCards) {
+                                    [self.cards removeObject:otherCard];
+                                }
+                                [self drawCardsToCount];
+                            }
+                            else {
                                 card.matched = YES;
+                                for (Card *otherCard in chosenCards) {
+                                    otherCard.matched = YES;
+                                }
                             }
                         }
                         else {
                             scoreChange -= MISMATCH_PENALTY;
-                            for (Card *card in chosenCards) {
-                                card.chosen = NO;
+                            for (Card *otherCard in chosenCards) {
+                                otherCard.chosen = NO;
                             }
                         }
                         break;
