@@ -19,6 +19,7 @@
 
 -(void)choseCardAtIndex:(NSUInteger)index;
 -(Card*)cardAtIndex:(NSUInteger)index;
+-(void)drawMoreCards:(NSUInteger)count;
 -(NSUInteger)cardsInPlay;
 
 @property (nonatomic, readonly) NSInteger score;

@@ -28,17 +28,16 @@
 {
     [super viewDidLoad];
     self.cardsToDeal = 12;
-    self.grid.minimumNumberOfCells = self.cardsToDeal;
     self.cardsToMatch = 2;
     self.removeMatched = YES;
 }
 
--(UIView*)viewWithCard:(Card*)card inFrame:(CGRect)frame
+-(UIView*)cardViewWithCard:(Card*)card
 {
     if ( !([card isKindOfClass:[SetCard class]]) ) return nil;
     
     SetCard *setCard = (SetCard*)card;
-    SetCardView *view = [[SetCardView alloc] initWithFrame:frame];
+    SetCardView *view = [[SetCardView alloc] init];
     view.number = setCard.number;
     view.symbol = setCard.symbol;
     view.color = setCard.color;
@@ -48,6 +47,9 @@
 }
 -(void)updateView:(UIView *)view withCard:(Card *)card
 {
+    if (![view isKindOfClass:[SetCardView class]]) return;
+    if (![card isKindOfClass:[SetCard class]]) return;
+    
     SetCardView *cardView = (SetCardView*)view;
     SetCard *setCard = (SetCard*)card;
         
@@ -68,20 +70,6 @@
     if (setCard.shading != cardView.shading) return NO;
     
     return YES;
-}
-
-- (void)drawRandomPlayingCard
-{
-    /*
-    Card *card = [[self createDeck] drawRandomCard];
-    if ([card isKindOfClass:[SetCard class]]) {
-        SetCard *setCard = (SetCard*)card;
-        self.setCardView.number = setCard.number;
-        self.setCardView.shading = setCard.shading;
-        self.setCardView.color = setCard.color;
-        self.setCardView.symbol = setCard.symbol;
-    }
-     */
 }
 
 @end

@@ -50,4 +50,11 @@
     return 2;
 }
 
+-(NSString*)description{
+    NSArray *colors = @[@"red",@"green",@"blue"];
+    NSArray *symbols = @[@"oval",@"diamond",@"squiggle"];
+    NSArray *shadings = @[@"open",@"striped",@"solid"];
+    return [NSString stringWithFormat:@"%d %@ %@ %@", self.number+1, colors[self.color], shadings[self.shading], symbols[self.symbol]];
+}
+
 @end

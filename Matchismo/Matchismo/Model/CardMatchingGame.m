@@ -52,6 +52,7 @@
             [self.cards addObject:card];
         }
         else {
+            NSLog(@"XXX OUT OF CARDS");
             break;
         }
     }
@@ -59,13 +60,7 @@
 
 -(Card*)cardAtIndex:(NSUInteger)index
 {
-    [self drawCardsToCount];
     return index<[self.cards count] ? self.cards[index] : nil;
-}
-
--(void)drawNewCardAtIndex:(NSUInteger)index
-{
-    self.cards[index] = [self.deck drawRandomCard];
 }
 
 static const int MISMATCH_PENALTY = 2;
@@ -124,6 +119,12 @@ static const int COST_TO_CHOOSE = 1;
     self.score += scoreChange;
     [history setObject:[NSNumber numberWithInt:scoreChange] forKey:@"score"];
     [self.statusHistory addObject:history];
+}
+
+-(void)drawMoreCards:(NSUInteger)count
+{
+    self.cardCount += count;
+    [self drawCardsToCount];
 }
 
 -(NSUInteger)cardsInPlay

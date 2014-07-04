@@ -10,10 +10,10 @@
 
 @interface CardGameViewController ()
 
-//@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) NSMutableArray *cardViews;  // of UIView
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UIView *cardTableView;
+@property (nonatomic) NSTimeInterval dealDelay;
 
 @end
 
@@ -22,14 +22,11 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.cardsToMatch = 0;
-    self.cardsToDeal = 1;
-    self.removeMatched = NO;
     self.cardTableView.backgroundColor = nil;
+    self.dealDelay = 0;
 }
 
 #pragma mark - Accessors
-
 -(Grid*)grid
 {
     if (!_grid) _grid = [[Grid alloc] init];
@@ -59,7 +56,12 @@
     return nil;
 }
 
-#pragma mark - Action Handlers
+#pragma mark - Outlets
+- (IBAction)moreCardsButton:(id)sender {
+    [self.game drawMoreCards:3];
+    [self updateUI];
+}
+
 - (IBAction)touchNewGameButton:(id)sender {
     for (UIView *view in self.cardViews) {
         [UIView animateWithDuration:0.5
@@ -71,95 +73,14 @@
                          completion:^(BOOL fin){
                              if (fin) [view removeFromSuperview];}];
     }
-
+    
+    // give the cards time to disappear
+    self.dealDelay = 0.5;
+    
     self.cardViews = nil;
     self.deck = nil;
     self.game = nil;
     [self updateUI];
-}
-
-#pragma mark - UI Drawing
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self updateUI];
-}
-
--(void)dealCards
-{
-    int row, col;
-    for (int i = 0; i < [self.game cardsInPlay]; i++) {
-        Card *card = [self.game cardAtIndex:i];
-
-        row = i / self.grid.columnCount;
-        col = i % self.grid.columnCount;
-        
-        if ( i < [self.cardViews count]) {
-            UIView *cardView = [self.cardViews objectAtIndex:i];
-            if (![self doesView:cardView representCard:card]) {
-                //UIView *existingView = [self findViewRepresentingCard:card indexHint:i];
-                int index = [self findViewRepresentingCard:card indexHint:i];
-                if (index == NSNotFound) {
-                    [[self.cardViews objectAtIndex:i] removeFromSuperview];
-                    
-                    CGRect frame = [self.grid frameOfCellAtRow:row inColumn:col];
-                    frame = CGRectInset(frame, 2, 2);
-                    frame.origin =  CGPointMake(self.cardTableView.frame.size.width, self.cardTableView.frame.size.height*2);
-                    UIView *newCardView = [self viewWithCard:card inFrame:frame];
-                    //cardView.tag = i;
-                    [self addTapToView:newCardView];
-                    //[self.cardViews addObject:cardView];
-                    self.cardViews[i] = newCardView;
-                    [self.cardTableView addSubview:newCardView];
-                    [UIView animateWithDuration:0.3
-                                          delay:0.5 + 0.05*i
-                                        options:UIViewAnimationOptionCurveLinear
-                                     animations:^(void){
-                                         newCardView.center = [self.grid centerOfCellAtRow:row inColumn:col];
-                                     }
-                                     completion:^(BOOL finished){}];
-                }
-                else {
-                    [self.cardViews exchangeObjectAtIndex:i withObjectAtIndex:index];
-                    [self.cardViews[i] setCenter:[self.grid centerOfCellAtRow:row inColumn:col]];
-                }
-            }
-            else {
-                [self updateView:cardView withCard:card];
-            }
-        }
-        else {
-            CGRect frame = [self.grid frameOfCellAtRow:row inColumn:col];
-            frame = CGRectInset(frame, 2, 2);
-            frame.origin =  CGPointMake(self.cardTableView.frame.size.width, self.cardTableView.frame.size.height);
-            UIView *newCardView = [self viewWithCard:card inFrame:frame];
-            //cardView.tag = i;
-            [self addTapToView:newCardView];
-            [self.cardViews addObject:newCardView];
-            [self.cardTableView addSubview:newCardView];
-            [UIView animateWithDuration:0.3
-                                  delay:0.5 + 0.05*i
-                                options:UIViewAnimationOptionCurveLinear
-                             animations:^(void){
-                                 newCardView.center = [self.grid centerOfCellAtRow:row inColumn:col];
-                             }
-                             completion:^(BOOL finished){}];
-        }
-        
-        if ([self.cardViews count] > [self.game cardsInPlay]) {
-            NSLog(@"EXTRA VIEWZ");
-        }
-         
-    }
-}
-
-             
--(void)addTapToView:(UIView*)view
-{
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                          action:@selector(tapCard:)];
-    [view addGestureRecognizer:tap];
 }
 
 -(void)tapCard:(UITapGestureRecognizer*)tap
@@ -168,54 +89,139 @@
     [self updateUI];
 }
 
--(NSUInteger)findViewRepresentingCard:(Card*)card indexHint:(NSUInteger)index
+#pragma mark - View
+-(void)viewWillAppear:(BOOL)animated
 {
-    /*
-    // check at index
-    UIView *view = [self.cardViews objectAtIndex:index];
-    if ([self doesView:view representCard:card]) return index;
-    */
-    for (int i = index + 1; i < [self.game cardsInPlay]; i++) {
-        UIView *view = [self.cardViews objectAtIndex:i];
-        if ([self doesView:view representCard:card]) return i;
-    }
-    
-    /*
-    for (int i = 0; i < index; i++) {
-        UIView *view = [self.cardViews objectAtIndex:i];
-        if ([self doesView:view representCard:card]) return view;
-    }
-     */
-    
-    return NSNotFound;
-}
-
-// abstract
--(UIView*)viewWithCard:(Card*)card inFrame:(CGRect)frame
-{
-    // create and return a card view based on the provided card in the provided frame
-    UIView *view = [[UIView alloc] initWithFrame:frame];
-    [view setBackgroundColor:[UIColor blueColor]];
-    return view;
-}
-
-// abstract
--(BOOL)doesView:(UIView*)view representCard:(Card*)card
-{
-    // determine whether the view is a representation of the card value
-    return YES;
-}
-
-// abstract
--(void)updateView:(UIView*)view withCard:(Card*)card
-{
-    // make any changes to the view based on the changing state of the card
+    [super viewWillAppear:animated];
+    [self updateUI];
 }
 
 -(void)updateUI
 {
     [self dealCards];
+    [self alignCardsToGrid];
+    
+    for (int i = 0; i < [self.cardViews count]; i++) {
+        Card *card = [self.game cardAtIndex:i];
+        [self updateView:[self.cardViews objectAtIndex:i] withCard:card];
+    }
+    
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+}
+
+-(void)dealCards
+{
+    NSTimeInterval dealDelay = 0;
+    for (int i = 0; i < [self.game cardsInPlay]; i++) {
+        Card *card = [self.game cardAtIndex:i];
+        
+        if (i == [self.cardViews count]) {
+            UIView *cardView = [self addViewWithCard:card atIndex:i afterDelay:dealDelay];
+            dealDelay += 0.3;
+            [self.cardViews addObject:cardView];
+        }
+        else {
+            UIView *cardView = [self.cardViews objectAtIndex:i];
+        
+            if (![self doesView:cardView representCard:card]) {
+                int index = [self findViewRepresentingCard:card indexHint:i];
+                if (index == NSNotFound) {
+                    NSLog(@"XXX ANIMATE REMOVE CARD");
+                    [[self.cardViews objectAtIndex:i] removeFromSuperview];
+
+                    UIView *newView = [self addViewWithCard:card atIndex:i afterDelay:dealDelay];
+                    dealDelay += 0.3;
+                    [self.cardViews replaceObjectAtIndex:i withObject:newView];
+                }
+                else {
+                    [self.cardViews exchangeObjectAtIndex:i withObjectAtIndex:index];
+                }
+            }
+        }
+    }
+
+    self.dealDelay = 0;
+}
+
+-(void)alignCardsToGrid
+{
+    for (int i = 0; i < [self.cardViews count]; i++) {
+        int row = i / self.grid.columnCount;
+        int col = i % self.grid.columnCount;
+        UIView *view = [self.cardViews objectAtIndex:i];
+        
+        if (!CGPointEqualToPoint([self.grid centerOfCellAtRow:row inColumn:col],
+                                 view.center)) {
+            view.center = [self.grid centerOfCellAtRow:row inColumn:col];
+        }
+        
+        if (!CGRectEqualToRect([self.grid frameOfCellAtRow:row inColumn:col], view.frame)) {
+            view.frame = [self.grid frameOfCellAtRow:row inColumn:col];
+        }
+            
+    }
+}
+
+-(UIView*)addViewWithCard:(Card*)card atIndex:(NSUInteger)index afterDelay:(NSTimeInterval)delay
+{
+    int row = index / self.grid.columnCount;
+    int col = index % self.grid.columnCount;
+
+    UIView *view = [self cardViewWithCard:card];
+    
+    // start card offscreen
+    CGRect frame = [self.grid frameOfCellAtRow:row inColumn:col];
+    frame.origin = CGPointMake(self.cardTableView.frame.size.width,
+                               self.cardTableView.frame.size.height*2);
+    view.frame = frame;
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapCard:)];
+    [view addGestureRecognizer:tap];
+    
+    [self.cardTableView addSubview:view];
+    [UIView animateWithDuration:0.3
+                          delay:self.dealDelay + 0.05*delay
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^(void){
+                         view.center = [self.grid centerOfCellAtRow:row inColumn:col];
+                     }
+                     completion:^(BOOL finished){}];
+    
+    return view;
+}
+
+-(NSUInteger)findViewRepresentingCard:(Card*)card indexHint:(NSUInteger)index
+{
+    @try {
+        for (int i = index + 1; i < [self.game cardsInPlay]; i++) {
+            UIView *view = [self.cardViews objectAtIndex:i];
+            if ([self doesView:view representCard:card]) return i;
+        }
+    }
+    @catch (NSException *exception) {
+        return NSNotFound;
+    }
+    
+    return NSNotFound;
+}
+
+#pragma mark - Abstract
+-(UIView*)cardViewWithCard:(Card*)card
+{
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor blueColor]];
+    return view;
+}
+
+-(void)updateView:(UIView*)view withCard:(Card*)card
+{
+    // make any changes to the view based on the changing state of the card
+}
+
+-(BOOL)doesView:(UIView*)view representCard:(Card*)card
+{
+    // check card contents against view contents
+    return YES;
 }
 
 @end

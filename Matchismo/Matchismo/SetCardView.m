@@ -153,6 +153,13 @@
     }
 }
 
+-(NSString*)description{
+    NSArray *colors = @[@"red",@"green",@"blue"];
+    NSArray *symbols = @[@"oval",@"diamond",@"squiggle"];
+    NSArray *shadings = @[@"open",@"striped",@"solid"];
+    return [NSString stringWithFormat:@"%d %@ %@ %@", self.number+1, colors[self.color], shadings[self.shading], symbols[self.symbol]];
+}
+
 -(void)drawSymbol:(NSUInteger)symbol
      withShading:(NSUInteger)shading
           inRect:(CGRect)rect
@@ -197,7 +204,7 @@
 
     if (shading == 1) {
         UIBezierPath *stripes = [[UIBezierPath alloc] init];
-        stripes.lineWidth = 0.7*[self scaleFactor];
+        stripes.lineWidth = 1*[self scaleFactor];
         for (int i = 4; i < rect.size.width; i+= 4 ) {
             [stripes moveToPoint:CGPointMake(i + rect.origin.x - 2, rect.origin.y)];
             [stripes addLineToPoint:CGPointMake(i + rect.origin.x + 2, rect.size.height + rect.origin.y)];

@@ -34,12 +34,12 @@
     self.grid.minimumNumberOfCells = self.cardsToDeal;
 }
 
--(UIView*)viewWithCard:(Card*)card inFrame:(CGRect)frame
+-(UIView*)cardViewWithCard:(Card*)card
 {
     if ( !([card isKindOfClass:[PlayingCard class]]) ) return nil;
     
     PlayingCard *playingCard = (PlayingCard*)card;
-    PlayingCardView *view = [[PlayingCardView alloc] initWithFrame:frame];
+    PlayingCardView *view = [[PlayingCardView alloc] init];
     view.rank = playingCard.rank;
     view.suit = playingCard.suit;
 
@@ -48,6 +48,9 @@
 
 -(void)updateView:(UIView *)view withCard:(Card *)card
 {
+    if (![view isKindOfClass:[PlayingCardView class]]) return;
+    if (![card isKindOfClass:[PlayingCard class]]) return;
+    
     PlayingCardView *cardView = (PlayingCardView*)view;
     if ( cardView.faceUp != card.isChosen ) {
         [UIView transitionWithView:cardView
@@ -66,16 +69,18 @@
     }
 }
 
-- (void)drawRandomPlayingCard
+-(BOOL)doesView:(UIView*)view representCard:(Card*)card
 {
-    /*
-    Card *card = [[self createDeck] drawRandomCard];
-    if ([card isKindOfClass:[PlayingCard class]]) {
-        PlayingCard *playingCard = (PlayingCard *)card;
-        self.playingCardView.rank = playingCard.rank;
-        self.playingCardView.suit = playingCard.suit;
-    }
-     */
+    if (![view isKindOfClass:[PlayingCardView class]]) return NO;
+    if (![card isKindOfClass:[PlayingCard class]]) return NO;
+    
+    PlayingCardView *cardView = (PlayingCardView*)view;
+    PlayingCard *playingCard = (PlayingCard*)card;
+    
+    if (![playingCard.suit isEqualToString:cardView.suit]) return NO;
+    if (playingCard.rank != cardView.rank) return NO;
+    
+    return YES;
 }
 
 @end

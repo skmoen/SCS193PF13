@@ -114,7 +114,7 @@
     CGRect frame = CGRectMake(0, 0, self.cellSize.width, self.cellSize.height);
     frame.origin.x += column * self.cellSize.width;
     frame.origin.y += row * self.cellSize.height;
-    return frame;
+    return CGRectInset(frame, 2, 2);
 }
 
 - (void)setMinimumNumberOfCells:(NSUInteger)minimumNumberOfCells

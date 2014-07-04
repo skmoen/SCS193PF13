@@ -21,7 +21,7 @@
 
 @property (strong, nonatomic) Grid *grid;
 
--(UIView*)viewWithCard:(Card*)card inFrame:(CGRect)frame;
+-(UIView*)cardViewWithCard:(Card*)card;
 -(BOOL)doesView:(UIView*)view representCard:(Card*)card;
 -(void)updateView:(UIView*)view withCard:(Card*)card;
 
