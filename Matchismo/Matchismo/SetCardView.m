@@ -97,16 +97,19 @@
     
     
     if (self.color == 0) {
-        [[UIColor redColor] setFill];
-        [[UIColor redColor] setStroke];
+        UIColor *purple = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
+        [purple setFill];
+        [purple setStroke];
     }
     else if (self.color == 1) {
-        [[UIColor greenColor] setFill];
-        [[UIColor greenColor] setStroke];
+        UIColor *green = [UIColor colorWithRed:0.1 green:0.7 blue:0.1 alpha:1];
+        [green setFill];
+        [green setStroke];
     }
     else if (self.color == 2) {
-        [[UIColor blueColor] setFill];
-        [[UIColor blueColor] setStroke];
+        UIColor *blue = [UIColor blueColor];
+        [blue setFill];
+        [blue setStroke];
     }
     
     CGPoint symbolShape = CGPointMake(self.bounds.size.width - [self symbolHeight]/2, [self symbolHeight]);

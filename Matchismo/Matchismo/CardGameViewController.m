@@ -172,7 +172,7 @@
     // start card offscreen
     CGRect frame = [self.grid frameOfCellAtRow:row inColumn:col];
     frame.origin = CGPointMake(self.cardTableView.frame.size.width,
-                               self.cardTableView.frame.size.height*2);
+                               self.cardTableView.frame.size.height + frame.size.height);
     view.frame = frame;
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapCard:)];
@@ -203,6 +203,12 @@
     }
     
     return NSNotFound;
+}
+
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [self alignCardsToGrid];
 }
 
 #pragma mark - Abstract
