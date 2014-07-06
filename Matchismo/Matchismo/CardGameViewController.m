@@ -153,8 +153,6 @@
             }
         }
     }
-
-    //self.dealDelay = 0;
 }
 
 -(void)alignCardsToGrid
@@ -164,29 +162,18 @@
         int col = i % self.grid.columnCount;
         UIView *view = [self.cardViews objectAtIndex:i];
         
-        if (!CGPointEqualToPoint([self.grid centerOfCellAtRow:row inColumn:col],
-                                 view.center)) {
+        if (!CGPointEqualToPoint([self.grid centerOfCellAtRow:row inColumn:col], view.center) ||
+            !CGRectEqualToRect([self.grid frameOfCellAtRow:row inColumn:col], view.frame)) {
             [UIView animateWithDuration:0.5
                                   delay:self.dealDelay/2
                                 options:UIViewAnimationOptionBeginFromCurrentState
                              animations:^(void) {
                                  view.center = [self.grid centerOfCellAtRow:row inColumn:col];
-                             }
-                             completion:^(BOOL fin) {
-                             }];
-        }
-        
-        if (!CGRectEqualToRect([self.grid frameOfCellAtRow:row inColumn:col], view.frame)) {
-            [UIView animateWithDuration:0.5
-                                  delay:self.dealDelay/2
-                                options:UIViewAnimationOptionBeginFromCurrentState
-                             animations:^(void) {
                                  view.frame = [self.grid frameOfCellAtRow:row inColumn:col];
                              }
                              completion:^(BOOL fin) {
                              }];
         }
-
     }
 }
 
