@@ -107,6 +107,7 @@
     }
     
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+    self.dealDelay = 0;
 }
 
 -(void)dealCards
@@ -126,8 +127,21 @@
             if (![self doesView:cardView representCard:card]) {
                 int index = [self findViewRepresentingCard:card indexHint:i];
                 if (index == NSNotFound) {
-                    NSLog(@"XXX ANIMATE REMOVE CARD");
-                    [[self.cardViews objectAtIndex:i] removeFromSuperview];
+                    self.dealDelay = 1;
+                    [UIView animateWithDuration:0.5
+                                          delay:0
+                                        options:UIViewAnimationOptionBeginFromCurrentState
+                                     animations:^(void){
+                                         cardView.frame = CGRectInset(cardView.frame,
+                                                                      (cardView.frame.size.width/2)-1,
+                                                                      (cardView.frame.size.height/2)-1);
+                                         cardView.alpha = 0.3;
+                                     }
+                                     completion:^(BOOL fin) {
+                                         if (fin) {
+                                             [cardView removeFromSuperview];
+                                         }
+                                     }];
 
                     UIView *newView = [self addViewWithCard:card atIndex:i afterDelay:dealDelay];
                     dealDelay += 0.3;
@@ -140,7 +154,7 @@
         }
     }
 
-    self.dealDelay = 0;
+    //self.dealDelay = 0;
 }
 
 -(void)alignCardsToGrid
@@ -152,13 +166,27 @@
         
         if (!CGPointEqualToPoint([self.grid centerOfCellAtRow:row inColumn:col],
                                  view.center)) {
-            view.center = [self.grid centerOfCellAtRow:row inColumn:col];
+            [UIView animateWithDuration:0.5
+                                  delay:self.dealDelay/2
+                                options:UIViewAnimationOptionBeginFromCurrentState
+                             animations:^(void) {
+                                 view.center = [self.grid centerOfCellAtRow:row inColumn:col];
+                             }
+                             completion:^(BOOL fin) {
+                             }];
         }
         
         if (!CGRectEqualToRect([self.grid frameOfCellAtRow:row inColumn:col], view.frame)) {
-            view.frame = [self.grid frameOfCellAtRow:row inColumn:col];
+            [UIView animateWithDuration:0.5
+                                  delay:self.dealDelay/2
+                                options:UIViewAnimationOptionBeginFromCurrentState
+                             animations:^(void) {
+                                 view.frame = [self.grid frameOfCellAtRow:row inColumn:col];
+                             }
+                             completion:^(BOOL fin) {
+                             }];
         }
-            
+
     }
 }
 
