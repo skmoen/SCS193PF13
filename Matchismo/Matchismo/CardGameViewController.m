@@ -66,12 +66,15 @@
     for (UIView *view in self.cardViews) {
         [UIView animateWithDuration:0.5
                               delay:0
-                            options:UIViewAnimationOptionBeginFromCurrentState
+                            options:UIViewAnimationOptionCurveEaseInOut
                          animations:^(void){
                              view.alpha = 0;
                          }
                          completion:^(BOOL fin){
-                             if (fin) [view removeFromSuperview];}];
+                             if (fin) {
+                                 [view removeFromSuperview];
+                             }
+                         }];
     }
     
     // give the cards time to disappear
@@ -130,7 +133,7 @@
                     self.dealDelay = 1;
                     [UIView animateWithDuration:0.5
                                           delay:0
-                                        options:UIViewAnimationOptionBeginFromCurrentState
+                                        options:UIViewAnimationOptionCurveEaseInOut
                                      animations:^(void){
                                          cardView.frame = CGRectInset(cardView.frame,
                                                                       (cardView.frame.size.width/2)-1,
@@ -161,18 +164,20 @@
         int row = i / self.grid.columnCount;
         int col = i % self.grid.columnCount;
         UIView *view = [self.cardViews objectAtIndex:i];
-        
-        if (!CGPointEqualToPoint([self.grid centerOfCellAtRow:row inColumn:col], view.center) ||
-            !CGRectEqualToRect([self.grid frameOfCellAtRow:row inColumn:col], view.frame)) {
+
+        if (!CGPointEqualToPoint([self.grid centerOfCellAtRow:row inColumn:col], view.center)) {
             [UIView animateWithDuration:0.5
                                   delay:self.dealDelay/2
-                                options:UIViewAnimationOptionBeginFromCurrentState
+                                options:UIViewAnimationOptionCurveEaseInOut
                              animations:^(void) {
                                  view.center = [self.grid centerOfCellAtRow:row inColumn:col];
-                                 view.frame = [self.grid frameOfCellAtRow:row inColumn:col];
                              }
                              completion:^(BOOL fin) {
                              }];
+        }
+        
+        if (!CGRectEqualToRect([self.grid frameOfCellAtRow:row inColumn:col], view.frame)) {
+            view.frame = [self.grid frameOfCellAtRow:row inColumn:col];
         }
     }
 }
