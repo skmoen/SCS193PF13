@@ -24,6 +24,9 @@
     [super viewDidLoad];
     self.cardTableView.backgroundColor = nil;
     self.dealDelay = 0;
+    
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(cardTablePinch:)];
+    [self.cardTableView addGestureRecognizer:pinch];
 }
 
 #pragma mark - Accessors
@@ -57,7 +60,7 @@
 }
 
 #pragma mark - Outlets
-- (IBAction)moreCardsButton:(id)sender {
+- (IBAction)touchMoreCardsButton:(id)sender {
     [self.game drawMoreCards:3];
     [self updateUI];
 }
@@ -88,8 +91,15 @@
 
 -(void)tapCard:(UITapGestureRecognizer*)tap
 {
-    [self.game choseCardAtIndex:[self.cardViews indexOfObject:tap.view]];
-    [self updateUI];
+    if (tap.state == UIGestureRecognizerStateRecognized) {
+        [self.game choseCardAtIndex:[self.cardViews indexOfObject:tap.view]];
+        [self updateUI];
+    }
+}
+
+-(void)cardTablePinch:(UIPinchGestureRecognizer*)pinch
+{
+    NSLog(@"PINCH");
 }
 
 #pragma mark - View
@@ -102,7 +112,7 @@
 -(void)updateUI
 {
     [self dealCards];
-    [self alignCardsToGrid];
+    [self alignCardsToGridInDuration:0.5];
     
     for (int i = 0; i < [self.cardViews count]; i++) {
         Card *card = [self.game cardAtIndex:i];
@@ -158,7 +168,7 @@
     }
 }
 
--(void)alignCardsToGrid
+-(void)alignCardsToGridInDuration:(NSTimeInterval)duration
 {
     for (int i = 0; i < [self.cardViews count]; i++) {
         int row = i / self.grid.columnCount;
@@ -166,18 +176,23 @@
         UIView *view = [self.cardViews objectAtIndex:i];
 
         if (!CGPointEqualToPoint([self.grid centerOfCellAtRow:row inColumn:col], view.center)) {
-            [UIView animateWithDuration:0.5
-                                  delay:self.dealDelay/2
+            [UIView animateWithDuration:duration
+                                  delay:0.2+self.dealDelay/2
                                 options:UIViewAnimationOptionCurveEaseInOut
                              animations:^(void) {
                                  view.center = [self.grid centerOfCellAtRow:row inColumn:col];
                              }
-                             completion:^(BOOL fin) {
-                             }];
+                             completion:nil];
         }
         
         if (!CGRectEqualToRect([self.grid frameOfCellAtRow:row inColumn:col], view.frame)) {
-            view.frame = [self.grid frameOfCellAtRow:row inColumn:col];
+            [UIView animateWithDuration:duration
+                                  delay:0.2+self.dealDelay/2
+                                options:UIViewAnimationOptionCurveEaseInOut
+                             animations:^(void) {
+                                 view.frame = [self.grid frameOfCellAtRow:row inColumn:col];
+                             }
+                             completion:nil];
         }
     }
 }
@@ -228,7 +243,7 @@
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self alignCardsToGrid];
+    [self alignCardsToGridInDuration:duration];
 }
 
 #pragma mark - Abstract

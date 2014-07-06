@@ -59,7 +59,7 @@
                             <constraint firstItem="GgP-3l-o2c" firstAttribute="leading" secondItem="M5M-75-8eh" secondAttribute="trailing" constant="8" symbolic="YES" id="zBP-XX-B4r"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="PlayingCard" id="HLd-Gf-8R0"/>
+                    <tabBarItem key="tabBarItem" title="PlayingCard" image="spade" id="HLd-Gf-8R0"/>
                     <connections>
                         <outlet property="cardTableView" destination="b2S-Bf-FFz" id="q4N-bx-eEj"/>
                         <outlet property="scoreLabel" destination="GgP-3l-o2c" id="OlA-kg-Tvw"/>
@@ -108,6 +108,7 @@
                                 <state key="normal" title="3 More"/>
                                 <connections>
                                     <action selector="moreCardsButton:" destination="wSO-a9-NNN" eventType="touchUpInside" id="Uv1-Uc-dWl"/>
+                                    <action selector="touchMoreCardsButton:" destination="wSO-a9-NNN" eventType="touchUpInside" id="znT-Ah-Apc"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTc-eC-Ite">
@@ -135,7 +136,7 @@
                             <constraint firstAttribute="bottom" secondItem="wTc-eC-Ite" secondAttribute="bottom" constant="57" id="wWS-cm-uAg"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="SetCard" id="htt-98-zXm"/>
+                    <tabBarItem key="tabBarItem" title="SetCard" image="diamond" id="htt-98-zXm"/>
                     <connections>
                         <outlet property="cardTableView" destination="PTR-MV-yS7" id="Gcv-6y-9oC"/>
                         <outlet property="scoreLabel" destination="wTc-eC-Ite" id="LNk-wZ-ias"/>
@@ -165,6 +166,10 @@
             <point key="canvasLocation" x="509" y="744"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="diamond" width="30" height="30"/>
+        <image name="spade" width="30" height="30"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
