@@ -8,12 +8,15 @@
 
 #import "CardGameViewController.h"
 
-@interface CardGameViewController ()
+@interface CardGameViewController () <UIDynamicAnimatorDelegate>
 
 @property (strong, nonatomic) NSMutableArray *cardViews;  // of UIView
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UIView *cardTableView;
 @property (nonatomic) NSTimeInterval dealDelay;
+
+@property (strong, nonatomic) UIDynamicAnimator *animator;
+@property (nonatomic) BOOL cardsPiled;
 
 @end
 
@@ -25,8 +28,13 @@
     self.cardTableView.backgroundColor = nil;
     self.dealDelay = 0;
     
-    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(cardTablePinch:)];
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchCardTable:)];
     [self.cardTableView addGestureRecognizer:pinch];
+    
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panCardPile:)];
+    [self.cardTableView addGestureRecognizer:pan];
+    
+    self.cardsPiled = NO;
 }
 
 #pragma mark - Accessors
@@ -57,6 +65,15 @@
 -(Deck*)deck
 {
     return nil;
+}
+
+-(UIDynamicAnimator*)animator
+{
+    if (!_animator) {
+        _animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.cardTableView];
+        _animator.delegate = self;
+    }
+    return _animator;
 }
 
 #pragma mark - Outlets
@@ -92,15 +109,43 @@
 -(void)tapCard:(UITapGestureRecognizer*)tap
 {
     if (tap.state == UIGestureRecognizerStateRecognized) {
-        [self.game choseCardAtIndex:[self.cardViews indexOfObject:tap.view]];
-        [self updateUI];
+        if (self.cardsPiled) {
+            self.animator = nil;
+            self.cardsPiled = NO;
+            [self updateUI];
+        }
+        else {
+            [self.game choseCardAtIndex:[self.cardViews indexOfObject:tap.view]];
+            [self updateUI];
+        }
     }
 }
 
--(void)cardTablePinch:(UIPinchGestureRecognizer*)pinch
+-(void)pinchCardTable:(UIPinchGestureRecognizer*)pinch
 {
-    NSLog(@"PINCH");
+    if (pinch.state == UIGestureRecognizerStateRecognized) {
+        for (UIView *cardView in self.cardViews) {
+            UISnapBehavior *snap = [[UISnapBehavior alloc] initWithItem:cardView snapToPoint:self.cardTableView.center];
+            [self.animator addBehavior:snap];
+        }
+        self.cardsPiled = YES;
+    }
 }
+
+-(void)panCardPile:(UIPanGestureRecognizer*)pan
+{
+    if (self.cardsPiled && pan.state == UIGestureRecognizerStateChanged) {
+        NSLog(@"PAN");
+    }
+}
+
+/*
+#pragma mark - UIDynamicAllocatorDelecate
+- (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator
+{
+    NSLog(@"PAUSED");
+}
+ */
 
 #pragma mark - View
 -(void)viewWillAppear:(BOOL)animated
