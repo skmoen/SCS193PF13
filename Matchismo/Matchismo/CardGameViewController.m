@@ -134,8 +134,27 @@
 
 -(void)panCardPile:(UIPanGestureRecognizer*)pan
 {
-    if (self.cardsPiled && pan.state == UIGestureRecognizerStateChanged) {
-        NSLog(@"PAN");
+    if (self.cardsPiled) {
+        if ( pan.state == UIGestureRecognizerStateBegan) {
+            if (self.animator) self.animator = nil;
+            
+            for (UIView *view in self.cardViews) {
+                UIAttachmentBehavior *attach = [[UIAttachmentBehavior alloc] initWithItem:view
+                                                                         attachedToAnchor:[pan locationInView:self.cardTableView]];
+                [self.animator addBehavior:attach];
+            }
+        }
+        else if (pan.state == UIGestureRecognizerStateChanged) {
+            for (UIDynamicBehavior *behavior in self.animator.behaviors) {
+                if ([behavior isKindOfClass:[UIAttachmentBehavior class]]) {
+                    UIAttachmentBehavior *attach = (UIAttachmentBehavior*)behavior;
+                    attach.anchorPoint = [pan locationInView:self.cardTableView];
+                }
+            }
+        }
+        else if (pan.state == UIGestureRecognizerStateEnded) {
+            self.animator = nil;
+        }
     }
 }
 
