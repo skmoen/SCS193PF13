@@ -196,6 +196,7 @@
             UIView *cardView = [self.cardViews objectAtIndex:i];
         
             if (![self doesView:cardView representCard:card]) {
+                self.dealDelay = 0.5;  // cards matched and removed
                 int index = [self findViewRepresentingCard:card indexHint:i];
                 if (index == NSNotFound) {
                     [UIView animateWithDuration:0.5
