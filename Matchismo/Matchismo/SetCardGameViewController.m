@@ -9,86 +9,67 @@
 #import "SetCardGameViewController.h"
 #import "SetCardDeck.h"
 #import "SetCard.h"
+#import "SetCardView.h"
 
 @interface SetCardGameViewController ()
-
 @end
 
 @implementation SetCardGameViewController
 
--(Deck *)createDeck
+@synthesize deck = _deck;
+
+-(Deck*)deck
 {
-    return [[SetCardDeck alloc] init];
+    if (!_deck) _deck = [[SetCardDeck alloc] init];
+    return _deck;
 }
 
--(NSInteger)viewCardsToMatch
+-(void)viewDidLoad
 {
-    return 2;
+    [super viewDidLoad];
+    self.cardsToDeal = 12;
+    self.cardsToMatch = 2;
+    self.removeMatched = YES;
 }
 
--(NSAttributedString*)attributedStringFromHistory:(NSDictionary *)history
+-(UIView*)cardViewWithCard:(Card*)card
 {
-    if (![history objectForKey:@"cards"]) return [[NSAttributedString alloc] init];
+    if ( !([card isKindOfClass:[SetCard class]]) ) return nil;
     
-    int score = [[history objectForKey:@"score"] intValue];
-    NSMutableAttributedString *status = [[NSMutableAttributedString alloc] initWithString:@"("];
-    for (SetCard* card in [history objectForKey:@"cards"]) {
-        [status appendAttributedString:[self attributedStringFromCard:card]];
-        [status appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" "]]];
-    }
-    [status appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@")"]]];
+    SetCard *setCard = (SetCard*)card;
+    SetCardView *view = [[SetCardView alloc] init];
+    view.number = setCard.number;
+    view.symbol = setCard.symbol;
+    view.color = setCard.color;
+    view.shading = setCard.shading;
     
-    if (score > 0) {
-        [status appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" matched! +%d", score]]];
-    }
-    else if (score < 0 ) {
-        if ([[history objectForKey:@"cards"] count] > 2) {
-            [status appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" didn't match! %d", score]]];
-        }
-        else {
-            [status appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" selected. %d", score]]];
-        }
-    }
-    
-    return status;
+    return view;
 }
-
--(void)updateCards
+-(void)updateView:(UIView *)view withCard:(Card *)card
 {
-    for (UIButton *cardButton in self.cardButtons) {
-        int cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
-        SetCard *card = (SetCard*)[self.game cardAtIndex:cardButtonIndex];
-        [cardButton setAttributedTitle:[self attributedStringFromCard:card] forState:UIControlStateNormal];
+    if (![view isKindOfClass:[SetCardView class]]) return;
+    if (![card isKindOfClass:[SetCard class]]) return;
+    
+    SetCardView *cardView = (SetCardView*)view;
+    SetCard *setCard = (SetCard*)card;
         
-        [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
-        cardButton.enabled = !card.isMatched;
-    }
+    cardView.selected = setCard.isChosen;
 }
 
--(NSAttributedString*)attributedStringFromCard:(SetCard*)card
+-(BOOL)doesView:(UIView*)view representCard:(Card*)card
 {
-    NSMutableAttributedString *cardString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d%@", card.number, card.symbol]];
-    [cardString addAttribute:NSForegroundColorAttributeName value:[self colorForString:card.color withShading:card.shading] range:NSMakeRange(0, [cardString length])];
-    if ( [card.shading isEqualToString:@"open"] )
-        [cardString addAttribute:NSStrokeWidthAttributeName value:@3 range:NSMakeRange(0, [cardString length])];
-    return cardString;
-}
-
--(UIColor*)colorForString:(NSString*)string withShading:(NSString*)shading
-{
-    NSDictionary *shadeAlpha = @{@"striped": @0.3,
-                                 @"solid": @1,
-                                 @"open": @1};
+    if (![view isKindOfClass:[SetCardView class]]) return NO;
+    if (![card isKindOfClass:[SetCard class]]) return NO;
     
-    NSDictionary *colors = @{@"red": [UIColor colorWithRed:1 green:0 blue:0 alpha:[shadeAlpha[shading] floatValue]],  //[UIColor redColor],
-                             @"green": [UIColor colorWithRed:0 green:1 blue:0 alpha:[shadeAlpha[shading] floatValue]],  //[UIColor greenColor],
-                             @"blue": [UIColor colorWithRed:0 green:0 blue:1 alpha:[shadeAlpha[shading] floatValue]]};  // [UIColor blueColor]};
-    return [colors objectForKey:string];
-}
-
--(UIImage*)backgroundImageForCard:(Card*)card
-{
-    return [UIImage imageNamed:card.isChosen ? @"selectedcardfront" : @"cardfront"];
+    SetCardView *cardView = (SetCardView*)view;
+    SetCard *setCard = (SetCard*)card;
+    
+    if (setCard.number != cardView.number) return NO;
+    if (setCard.symbol != cardView.symbol) return NO;
+    if (setCard.color != cardView.color) return NO;
+    if (setCard.shading != cardView.shading) return NO;
+    
+    return YES;
 }
 
 @end

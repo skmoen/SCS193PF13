@@ -8,15 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "CardMatchingGame.h"
+#import "Grid.h"
 
 @interface CardGameViewController : UIViewController
 
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) CardMatchingGame *game;
+@property (strong, nonatomic) Deck *deck;
 
--(NSAttributedString*)attributedStringFromHistory:(NSDictionary*)history;
+@property (nonatomic) NSUInteger cardsToMatch;
+@property (nonatomic) NSUInteger cardsToDeal;
+@property (nonatomic) BOOL removeMatched;
 
--(NSInteger)viewCardsToMatch;  // abstract
--(Deck *)createDeck;  // abstract
+@property (strong, nonatomic) Grid *grid;
+
+-(UIView*)cardViewWithCard:(Card*)card;
+-(BOOL)doesView:(UIView*)view representCard:(Card*)card;
+-(void)updateView:(UIView*)view withCard:(Card*)card;
 
 @end

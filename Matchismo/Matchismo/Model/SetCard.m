@@ -7,6 +7,7 @@
 //
 
 #import "SetCard.h"
+#import "AttributeCounter.h"
 
 @implementation SetCard
 
@@ -14,98 +15,46 @@
 {
     int mismatch = 0;
     
-    NSMutableDictionary *numbers = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *colors = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *shadings = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *symbols = [[NSMutableDictionary alloc] init];
+    AttributeCounter *numbers = [[AttributeCounter alloc] init];
+    AttributeCounter *colors = [[AttributeCounter alloc] init];
+    AttributeCounter *shadings = [[AttributeCounter alloc] init];
+    AttributeCounter *symbols = [[AttributeCounter alloc] init];
     
-    numbers[ [NSNumber numberWithInteger:self.number] ] = @0;
-    colors[self.color] = @0;
-    shadings[self.shading] = @0;
-    symbols[self.symbol] = @0;
+    [numbers addItemCount:[NSNumber numberWithInt:self.number]];
+    [colors addItemCount:[NSNumber numberWithInt:self.color]];
+    [shadings addItemCount:[NSNumber numberWithInt:self.shading]];
+    [symbols addItemCount:[NSNumber numberWithInt:self.symbol]];
     
     for (SetCard *card in otherCards) {
-        NSNumber *num = [NSNumber numberWithInt:card.number];
-        NSNumber *numVal = [numbers objectForKey:num];
-        if (numVal) {
-            numbers[num] = [NSNumber numberWithInt:[numVal intValue] + 1];
-        }
-        else {
-            numbers[num] = @0;
-        }
-        
-        NSNumber *colorVal = [colors objectForKey:card.color];
-        if (colorVal) {
-            colors[card.color] = [NSNumber numberWithInt:[colorVal intValue] + 1];
-        }
-        else {
-            colors[card.color] = @0;
-        }
-        
-        NSNumber *shadVal = [shadings objectForKey:card.shading];
-        if (shadVal) {
-            shadings[card.shading] = [NSNumber numberWithInt:[shadVal intValue] +1];
-        }
-        else {
-            shadings[card.shading] = @0;
-        }
-        
-        NSNumber *symVal = [symbols objectForKey:card.symbol];
-        if (symVal) {
-            symbols[card.symbol] = [NSNumber numberWithInt:[symVal intValue] + 1];
-        }
-        else {
-            symbols[card.symbol] = @0;
-        }
+        [numbers addItemCount:[NSNumber numberWithInt:card.number]];
+        [colors addItemCount:[NSNumber numberWithInt:card.color]];
+        [shadings addItemCount:[NSNumber numberWithInt:card.shading]];
+        [symbols addItemCount:[NSNumber numberWithInt:card.symbol]];
     }
     
-    mismatch += [self countMismatchInDictionary:numbers];
-    mismatch += [self countMismatchInDictionary:colors];
-    mismatch += [self countMismatchInDictionary:shadings];
-    mismatch += [self countMismatchInDictionary:symbols];
+    mismatch += [numbers countMismatches];
+    mismatch += [colors countMismatches];
+    mismatch += [shadings countMismatches];
+    mismatch += [symbols countMismatches];
     
     return mismatch > 0 ? 0 : 5;
 }
 
--(NSInteger)countMismatchInDictionary:(NSDictionary*)dictionary
-{
-    int mismatch = 0;
-    for (id key in dictionary) {
-        if ( !([[dictionary objectForKey:key] isEqualToNumber:@0] || [[dictionary objectForKey:key] isEqualToNumber:@2]) ) {
-            mismatch++;
-        }
-    }
-    return mismatch;
-}
-
 -(NSString*)contents
 {
-    return [NSString stringWithFormat:@"%d%@", self.number, self.symbol];
+    return nil;
 }
 
-+(NSUInteger)maxNumber
++(NSUInteger)maxValue
 {
-    return 3;
+    return 2;
 }
 
-+(NSUInteger)minNumber
-{
-    return 1;
-}
-
-+(NSArray*)validSymbols
-{
-    return @[@"▲", @"●", @"■"];
-}
-
-+(NSArray*)validColors
-{
-    return @[@"red", @"green", @"blue"];
-}
-
-+(NSArray*)validShadings
-{
-    return @[@"open", @"striped", @"solid"];
+-(NSString*)description{
+    NSArray *colors = @[@"red",@"green",@"blue"];
+    NSArray *symbols = @[@"oval",@"diamond",@"squiggle"];
+    NSArray *shadings = @[@"open",@"striped",@"solid"];
+    return [NSString stringWithFormat:@"%d %@ %@ %@", self.number+1, colors[self.color], shadings[self.shading], symbols[self.symbol]];
 }
 
 @end
