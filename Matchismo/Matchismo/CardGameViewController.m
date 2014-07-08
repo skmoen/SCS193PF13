@@ -138,12 +138,13 @@
 {
     if (self.cardsPiled) {
         if ( pan.state == UIGestureRecognizerStateBegan) {
-            if (self.animator) self.animator = nil;
+            self.animator = nil;
             
             for (UIView *view in self.cardViews) {
                 UIAttachmentBehavior *attach = [[UIAttachmentBehavior alloc] initWithItem:view
                                                                          attachedToAnchor:[pan locationInView:self.cardTableView]];
                 [self.animator addBehavior:attach];
+                attach.length = (int)attach.length;  // round down
             }
         }
         else if (pan.state == UIGestureRecognizerStateChanged) {
@@ -151,6 +152,7 @@
                 if ([behavior isKindOfClass:[UIAttachmentBehavior class]]) {
                     UIAttachmentBehavior *attach = (UIAttachmentBehavior*)behavior;
                     attach.anchorPoint = [pan locationInView:self.cardTableView];
+                    if (attach.length > 0) attach.length--;
                 }
             }
         }
