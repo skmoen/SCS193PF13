@@ -107,8 +107,7 @@
                                 </constraints>
                                 <state key="normal" title="3 More"/>
                                 <connections>
-                                    <action selector="moreCardsButton:" destination="wSO-a9-NNN" eventType="touchUpInside" id="Uv1-Uc-dWl"/>
-                                    <action selector="touchMoreCardsButton:" destination="wSO-a9-NNN" eventType="touchUpInside" id="znT-Ah-Apc"/>
+                                    <action selector="touchMoreCardsButton:" destination="wSO-a9-NNN" eventType="touchUpInside" id="DMb-fz-d3A"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTc-eC-Ite">

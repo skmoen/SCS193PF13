@@ -78,7 +78,9 @@
 
 #pragma mark - Outlets
 - (IBAction)touchMoreCardsButton:(id)sender {
+    int cols = self.grid.columnCount;
     [self.game drawMoreCards:3];
+    if (self.grid.columnCount != cols) self.dealDelay = 0.5;
     [self updateUI];
 }
 
@@ -158,14 +160,6 @@
     }
 }
 
-/*
-#pragma mark - UIDynamicAllocatorDelecate
-- (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator
-{
-    NSLog(@"PAUSED");
-}
- */
-
 #pragma mark - View
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -176,6 +170,7 @@
 -(void)updateUI
 {
     [self dealCards];
+    self.dealDelay = 0;
     [self alignCardsToGridInDuration:0.5];
     
     for (int i = 0; i < [self.cardViews count]; i++) {
@@ -184,18 +179,17 @@
     }
     
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-    self.dealDelay = 0;
 }
 
 -(void)dealCards
 {
-    NSTimeInterval dealDelay = 0;
+    NSTimeInterval cardDelay = 0;
     for (int i = 0; i < [self.game cardsInPlay]; i++) {
         Card *card = [self.game cardAtIndex:i];
         
         if (i == [self.cardViews count]) {
-            UIView *cardView = [self addViewWithCard:card atIndex:i afterDelay:dealDelay];
-            dealDelay += 0.3;
+            UIView *cardView = [self addViewWithCard:card atIndex:i afterDelay:cardDelay];
+            cardDelay += 0.3;
             [self.cardViews addObject:cardView];
         }
         else {
@@ -204,7 +198,6 @@
             if (![self doesView:cardView representCard:card]) {
                 int index = [self findViewRepresentingCard:card indexHint:i];
                 if (index == NSNotFound) {
-                    self.dealDelay = 1;
                     [UIView animateWithDuration:0.5
                                           delay:0
                                         options:UIViewAnimationOptionCurveEaseInOut
@@ -220,8 +213,8 @@
                                          }
                                      }];
 
-                    UIView *newView = [self addViewWithCard:card atIndex:i afterDelay:dealDelay];
-                    dealDelay += 0.3;
+                    UIView *newView = [self addViewWithCard:card atIndex:i afterDelay:cardDelay];
+                    cardDelay += 0.3;
                     [self.cardViews replaceObjectAtIndex:i withObject:newView];
                 }
                 else {

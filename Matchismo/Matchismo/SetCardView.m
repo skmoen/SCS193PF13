@@ -169,11 +169,7 @@
 {
     CGContextRef contextRef = UIGraphicsGetCurrentContext();
     CGContextSaveGState(contextRef);
-    /*
-    UIBezierPath *debug = [UIBezierPath bezierPathWithRect:rect];
-    debug.lineWidth = 0.5;
-    [debug stroke];
-     */
+
     UIBezierPath *path;
     int midx = rect.origin.x + (rect.size.width/2);
     int midy = rect.origin.y + (rect.size.height/2);
