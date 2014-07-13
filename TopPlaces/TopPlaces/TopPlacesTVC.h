@@ -1,5 +1,5 @@
 //
-//  TopPlacesViewController.h
+//  TopPlacesTVC.h
 //  TopPlaces
 //
 //  Created by Scott Moen on 7/12/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TopPlacesViewController : UIViewController
+@interface TopPlacesTVC : UITableViewController
 
 @end
