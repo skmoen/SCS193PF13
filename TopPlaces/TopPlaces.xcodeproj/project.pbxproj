@@ -1,0 +1,472 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		79114416197244450005A5B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79114415197244450005A5B8 /* Foundation.framework */; };
+		79114418197244450005A5B8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79114417197244450005A5B8 /* CoreGraphics.framework */; };
+		7911441A197244450005A5B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79114419197244450005A5B8 /* UIKit.framework */; };
+		79114420197244450005A5B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7911441E197244450005A5B8 /* InfoPlist.strings */; };
+		79114422197244450005A5B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79114421197244450005A5B8 /* main.m */; };
+		79114426197244450005A5B8 /* TopPlacesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79114425197244450005A5B8 /* TopPlacesAppDelegate.m */; };
+		79114429197244450005A5B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79114427197244450005A5B8 /* Main.storyboard */; };
+		7911442C197244450005A5B8 /* TopPlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7911442B197244450005A5B8 /* TopPlacesViewController.m */; };
+		7911442E197244450005A5B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7911442D197244450005A5B8 /* Images.xcassets */; };
+		79114435197244450005A5B8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79114434197244450005A5B8 /* XCTest.framework */; };
+		79114436197244450005A5B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79114415197244450005A5B8 /* Foundation.framework */; };
+		79114437197244450005A5B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79114419197244450005A5B8 /* UIKit.framework */; };
+		7911443F197244450005A5B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7911443D197244450005A5B8 /* InfoPlist.strings */; };
+		79114441197244450005A5B8 /* TopPlacesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 79114440197244450005A5B8 /* TopPlacesTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		79114438197244450005A5B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7911440A197244450005A5B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 79114411197244450005A5B8;
+			remoteInfo = TopPlaces;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		79114412197244450005A5B8 /* TopPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		79114415197244450005A5B8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		79114417197244450005A5B8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		79114419197244450005A5B8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7911441D197244450005A5B8 /* TopPlaces-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TopPlaces-Info.plist"; sourceTree = "<group>"; };
+		7911441F197244450005A5B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		79114421197244450005A5B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		79114423197244450005A5B8 /* TopPlaces-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TopPlaces-Prefix.pch"; sourceTree = "<group>"; };
+		79114424197244450005A5B8 /* TopPlacesAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopPlacesAppDelegate.h; sourceTree = "<group>"; };
+		79114425197244450005A5B8 /* TopPlacesAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopPlacesAppDelegate.m; sourceTree = "<group>"; };
+		79114428197244450005A5B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7911442A197244450005A5B8 /* TopPlacesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopPlacesViewController.h; sourceTree = "<group>"; };
+		7911442B197244450005A5B8 /* TopPlacesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopPlacesViewController.m; sourceTree = "<group>"; };
+		7911442D197244450005A5B8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		79114433197244450005A5B8 /* TopPlacesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TopPlacesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		79114434197244450005A5B8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		7911443C197244450005A5B8 /* TopPlacesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TopPlacesTests-Info.plist"; sourceTree = "<group>"; };
+		7911443E197244450005A5B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		79114440197244450005A5B8 /* TopPlacesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopPlacesTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7911440F197244450005A5B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79114418197244450005A5B8 /* CoreGraphics.framework in Frameworks */,
+				7911441A197244450005A5B8 /* UIKit.framework in Frameworks */,
+				79114416197244450005A5B8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79114430197244450005A5B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79114435197244450005A5B8 /* XCTest.framework in Frameworks */,
+				79114437197244450005A5B8 /* UIKit.framework in Frameworks */,
+				79114436197244450005A5B8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		79114409197244450005A5B8 = {
+			isa = PBXGroup;
+			children = (
+				7911441B197244450005A5B8 /* TopPlaces */,
+				7911443A197244450005A5B8 /* TopPlacesTests */,
+				79114414197244450005A5B8 /* Frameworks */,
+				79114413197244450005A5B8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		79114413197244450005A5B8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				79114412197244450005A5B8 /* TopPlaces.app */,
+				79114433197244450005A5B8 /* TopPlacesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		79114414197244450005A5B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				79114415197244450005A5B8 /* Foundation.framework */,
+				79114417197244450005A5B8 /* CoreGraphics.framework */,
+				79114419197244450005A5B8 /* UIKit.framework */,
+				79114434197244450005A5B8 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7911441B197244450005A5B8 /* TopPlaces */ = {
+			isa = PBXGroup;
+			children = (
+				79114424197244450005A5B8 /* TopPlacesAppDelegate.h */,
+				79114425197244450005A5B8 /* TopPlacesAppDelegate.m */,
+				79114427197244450005A5B8 /* Main.storyboard */,
+				7911442A197244450005A5B8 /* TopPlacesViewController.h */,
+				7911442B197244450005A5B8 /* TopPlacesViewController.m */,
+				7911442D197244450005A5B8 /* Images.xcassets */,
+				7911441C197244450005A5B8 /* Supporting Files */,
+			);
+			path = TopPlaces;
+			sourceTree = "<group>";
+		};
+		7911441C197244450005A5B8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7911441D197244450005A5B8 /* TopPlaces-Info.plist */,
+				7911441E197244450005A5B8 /* InfoPlist.strings */,
+				79114421197244450005A5B8 /* main.m */,
+				79114423197244450005A5B8 /* TopPlaces-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7911443A197244450005A5B8 /* TopPlacesTests */ = {
+			isa = PBXGroup;
+			children = (
+				79114440197244450005A5B8 /* TopPlacesTests.m */,
+				7911443B197244450005A5B8 /* Supporting Files */,
+			);
+			path = TopPlacesTests;
+			sourceTree = "<group>";
+		};
+		7911443B197244450005A5B8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7911443C197244450005A5B8 /* TopPlacesTests-Info.plist */,
+				7911443D197244450005A5B8 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		79114411197244450005A5B8 /* TopPlaces */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79114444197244450005A5B8 /* Build configuration list for PBXNativeTarget "TopPlaces" */;
+			buildPhases = (
+				7911440E197244450005A5B8 /* Sources */,
+				7911440F197244450005A5B8 /* Frameworks */,
+				79114410197244450005A5B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TopPlaces;
+			productName = TopPlaces;
+			productReference = 79114412197244450005A5B8 /* TopPlaces.app */;
+			productType = "com.apple.product-type.application";
+		};
+		79114432197244450005A5B8 /* TopPlacesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79114447197244450005A5B8 /* Build configuration list for PBXNativeTarget "TopPlacesTests" */;
+			buildPhases = (
+				7911442F197244450005A5B8 /* Sources */,
+				79114430197244450005A5B8 /* Frameworks */,
+				79114431197244450005A5B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				79114439197244450005A5B8 /* PBXTargetDependency */,
+			);
+			name = TopPlacesTests;
+			productName = TopPlacesTests;
+			productReference = 79114433197244450005A5B8 /* TopPlacesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7911440A197244450005A5B8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TopPlaces;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Scott Moen";
+				TargetAttributes = {
+					79114432197244450005A5B8 = {
+						TestTargetID = 79114411197244450005A5B8;
+					};
+				};
+			};
+			buildConfigurationList = 7911440D197244450005A5B8 /* Build configuration list for PBXProject "TopPlaces" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 79114409197244450005A5B8;
+			productRefGroup = 79114413197244450005A5B8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				79114411197244450005A5B8 /* TopPlaces */,
+				79114432197244450005A5B8 /* TopPlacesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		79114410197244450005A5B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7911442E197244450005A5B8 /* Images.xcassets in Resources */,
+				79114420197244450005A5B8 /* InfoPlist.strings in Resources */,
+				79114429197244450005A5B8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79114431197244450005A5B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7911443F197244450005A5B8 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7911440E197244450005A5B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7911442C197244450005A5B8 /* TopPlacesViewController.m in Sources */,
+				79114426197244450005A5B8 /* TopPlacesAppDelegate.m in Sources */,
+				79114422197244450005A5B8 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7911442F197244450005A5B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79114441197244450005A5B8 /* TopPlacesTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		79114439197244450005A5B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 79114411197244450005A5B8 /* TopPlaces */;
+			targetProxy = 79114438197244450005A5B8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7911441E197244450005A5B8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7911441F197244450005A5B8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		79114427197244450005A5B8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				79114428197244450005A5B8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7911443D197244450005A5B8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7911443E197244450005A5B8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		79114442197244450005A5B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		79114443197244450005A5B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		79114445197244450005A5B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TopPlaces/TopPlaces-Prefix.pch";
+				INFOPLIST_FILE = "TopPlaces/TopPlaces-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		79114446197244450005A5B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TopPlaces/TopPlaces-Prefix.pch";
+				INFOPLIST_FILE = "TopPlaces/TopPlaces-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		79114448197244450005A5B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TopPlaces.app/TopPlaces";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TopPlaces/TopPlaces-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TopPlacesTests/TopPlacesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		79114449197244450005A5B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TopPlaces.app/TopPlaces";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TopPlaces/TopPlaces-Prefix.pch";
+				INFOPLIST_FILE = "TopPlacesTests/TopPlacesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7911440D197244450005A5B8 /* Build configuration list for PBXProject "TopPlaces" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79114442197244450005A5B8 /* Debug */,
+				79114443197244450005A5B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		79114444197244450005A5B8 /* Build configuration list for PBXNativeTarget "TopPlaces" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79114445197244450005A5B8 /* Debug */,
+				79114446197244450005A5B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		79114447197244450005A5B8 /* Build configuration list for PBXNativeTarget "TopPlacesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79114448197244450005A5B8 /* Debug */,
+				79114449197244450005A5B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7911440A197244450005A5B8 /* Project object */;
+}
