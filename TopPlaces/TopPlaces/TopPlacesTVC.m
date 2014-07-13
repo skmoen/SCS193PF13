@@ -7,28 +7,27 @@
 //
 
 #import "TopPlacesTVC.h"
+#import "TopPhotosTVC.h"
 #import "FlickrFetcher.h"
 
 @interface TopPlacesTVC ()
+
+@property (nonatomic, strong) NSMutableDictionary *placesByCountry;
 
 @end
 
 @implementation TopPlacesTVC
 
-/*
-- (id)initWithStyle:(UITableViewStyle)style
+-(NSMutableDictionary*)placesByCountry
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    if (!_placesByCountry) _placesByCountry = [[NSMutableDictionary alloc] init];
+    return _placesByCountry;
 }
- */
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self fetchPhotos];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -40,19 +39,24 @@
 - (IBAction)fetchPhotos
 {
     [self.refreshControl beginRefreshing]; // start the spinner
-    NSURL *url = [FlickrFetcher URLforTopPlaces];
-    NSData *jsonResults = [NSData dataWithContentsOfURL:url];
-#warning deal with error case
+    NSData *jsonResults = [NSData dataWithContentsOfURL:[FlickrFetcher URLforTopPlaces]];
     NSDictionary *dictResults = [NSJSONSerialization JSONObjectWithData:jsonResults
                                                                 options:0
                                                                   error:NULL];
-    NSLog(@"RESULTS: %@", dictResults);
     
+    for (NSDictionary *place in [dictResults valueForKeyPath:FLICKR_RESULTS_PLACES]) {
+        NSArray *placeParts = [[place valueForKeyPath:FLICKR_PLACE_NAME] componentsSeparatedByString:@", "];
+        NSString *country = [placeParts lastObject];
+
+        NSMutableArray *placeList = [self.placesByCountry objectForKey:country];
+        if (!placeList) {
+            placeList = [[NSMutableArray alloc] init];
+            [self.placesByCountry setObject:placeList forKey:country];
+        }
+        [placeList addObject:place];
+    }
     
-    
-    
-    
-    
+    [self.refreshControl endRefreshing];
 /*
     NSURL *url = [FlickrFetcher URLforRecentGeoreferencedPhotos];
     // create a (non-main) queue to do fetch on
@@ -78,70 +82,43 @@
 
 #pragma mark - Table view data source
 
+-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[self sortedKeys] objectAtIndex:section];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return [self.placesByCountry count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [[self.placesByCountry objectForKey:[[self sortedKeys] objectAtIndex:section]] count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Flickr Place Cell" forIndexPath:indexPath];
+    NSDictionary *city = [self cityAtIndexPath:indexPath];
+    NSArray *cityParts = [[city valueForKeyPath:FLICKR_PLACE_NAME] componentsSeparatedByString:@", "];
+    cell.textLabel.text = [cityParts firstObject];
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+-(NSArray*)sortedKeys
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+    return [[self.placesByCountry allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+}
+
+-(NSDictionary*)cityAtIndexPath:(NSIndexPath*)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    NSArray *cities = [self.placesByCountry objectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
+    return [cities objectAtIndex:indexPath.row];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -149,7 +126,14 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    TopPhotosTVC *tptvc = [segue destinationViewController];
+    if ([segue.identifier isEqualToString:@"Top Photos"] && [tptvc isKindOfClass:[TopPhotosTVC class]]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        tptvc.place = [self cityAtIndexPath:indexPath];
+        NSArray *cityParts = [[tptvc.place valueForKeyPath:FLICKR_PLACE_NAME] componentsSeparatedByString:@", "];
+        tptvc.title = [cityParts firstObject];
+    }
 }
-*/
+
 
 @end
