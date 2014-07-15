@@ -22,8 +22,12 @@
 		79114441197244450005A5B8 /* TopPlacesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 79114440197244450005A5B8 /* TopPlacesTests.m */; };
 		7911444E19724B090005A5B8 /* FlickrFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7911444D19724B090005A5B8 /* FlickrFetcher.m */; };
 		7911445119724B6E0005A5B8 /* TopPlacesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7911445019724B6E0005A5B8 /* TopPlacesTVC.m */; };
+		79BF65B71975743B00CFC735 /* PhotosTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BF65B61975743B00CFC735 /* PhotosTVC.m */; };
 		79EF4EF919726FC600CE4B51 /* TopPhotosTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EF4EF819726FC600CE4B51 /* TopPhotosTVC.m */; };
 		79EF4EFC19727AED00CE4B51 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EF4EFB19727AED00CE4B51 /* ImageViewController.m */; };
+		79EF4EFF1972E24400CE4B51 /* PlacesByCountryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EF4EFE1972E24400CE4B51 /* PlacesByCountryTVC.m */; };
+		79EF4F0219730A2F00CE4B51 /* RecentPhotosTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EF4F0119730A2F00CE4B51 /* RecentPhotosTVC.m */; };
+		79EF4F0819730C4500CE4B51 /* HistoryUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EF4F0719730C4500CE4B51 /* HistoryUserDefaults.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,10 +63,18 @@
 		7911444D19724B090005A5B8 /* FlickrFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrFetcher.m; sourceTree = "<group>"; };
 		7911444F19724B6E0005A5B8 /* TopPlacesTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlacesTVC.h; sourceTree = "<group>"; };
 		7911445019724B6E0005A5B8 /* TopPlacesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlacesTVC.m; sourceTree = "<group>"; };
+		79BF65B51975743B00CFC735 /* PhotosTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosTVC.h; sourceTree = "<group>"; };
+		79BF65B61975743B00CFC735 /* PhotosTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosTVC.m; sourceTree = "<group>"; };
 		79EF4EF719726FC600CE4B51 /* TopPhotosTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPhotosTVC.h; sourceTree = "<group>"; };
 		79EF4EF819726FC600CE4B51 /* TopPhotosTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPhotosTVC.m; sourceTree = "<group>"; };
 		79EF4EFA19727AED00CE4B51 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		79EF4EFB19727AED00CE4B51 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		79EF4EFD1972E24400CE4B51 /* PlacesByCountryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesByCountryTVC.h; sourceTree = "<group>"; };
+		79EF4EFE1972E24400CE4B51 /* PlacesByCountryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesByCountryTVC.m; sourceTree = "<group>"; };
+		79EF4F0019730A2F00CE4B51 /* RecentPhotosTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentPhotosTVC.h; sourceTree = "<group>"; };
+		79EF4F0119730A2F00CE4B51 /* RecentPhotosTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentPhotosTVC.m; sourceTree = "<group>"; };
+		79EF4F0619730C4500CE4B51 /* HistoryUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryUserDefaults.h; sourceTree = "<group>"; };
+		79EF4F0719730C4500CE4B51 /* HistoryUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryUserDefaults.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,12 +135,20 @@
 			isa = PBXGroup;
 			children = (
 				79114427197244450005A5B8 /* Main.storyboard */,
-				7911444F19724B6E0005A5B8 /* TopPlacesTVC.h */,
-				7911445019724B6E0005A5B8 /* TopPlacesTVC.m */,
+				79EF4EFD1972E24400CE4B51 /* PlacesByCountryTVC.h */,
+				79EF4EFE1972E24400CE4B51 /* PlacesByCountryTVC.m */,
 				79EF4EF719726FC600CE4B51 /* TopPhotosTVC.h */,
 				79EF4EF819726FC600CE4B51 /* TopPhotosTVC.m */,
+				79EF4F0019730A2F00CE4B51 /* RecentPhotosTVC.h */,
+				79EF4F0119730A2F00CE4B51 /* RecentPhotosTVC.m */,
+				79BF65B51975743B00CFC735 /* PhotosTVC.h */,
+				79BF65B61975743B00CFC735 /* PhotosTVC.m */,
+				7911444F19724B6E0005A5B8 /* TopPlacesTVC.h */,
+				7911445019724B6E0005A5B8 /* TopPlacesTVC.m */,
 				79EF4EFA19727AED00CE4B51 /* ImageViewController.h */,
 				79EF4EFB19727AED00CE4B51 /* ImageViewController.m */,
+				79EF4F0619730C4500CE4B51 /* HistoryUserDefaults.h */,
+				79EF4F0719730C4500CE4B51 /* HistoryUserDefaults.m */,
 				7911442D197244450005A5B8 /* Images.xcassets */,
 				7911444A19724B090005A5B8 /* Flickr Fetcher */,
 				7911441C197244450005A5B8 /* Supporting Files */,
@@ -276,11 +296,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				79EF4EFC19727AED00CE4B51 /* ImageViewController.m in Sources */,
+				79EF4EFF1972E24400CE4B51 /* PlacesByCountryTVC.m in Sources */,
+				79BF65B71975743B00CFC735 /* PhotosTVC.m in Sources */,
 				79114426197244450005A5B8 /* TopPlacesAppDelegate.m in Sources */,
 				7911445119724B6E0005A5B8 /* TopPlacesTVC.m in Sources */,
 				7911444E19724B090005A5B8 /* FlickrFetcher.m in Sources */,
+				79EF4F0819730C4500CE4B51 /* HistoryUserDefaults.m in Sources */,
 				79EF4EF919726FC600CE4B51 /* TopPhotosTVC.m in Sources */,
 				79114422197244450005A5B8 /* main.m in Sources */,
+				79EF4F0219730A2F00CE4B51 /* RecentPhotosTVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,4 +10,8 @@
 
 @interface TopPlacesTVC : UITableViewController
 
+@property (nonatomic, strong) NSMutableDictionary *itemsBySection;
+
+-(NSArray*)sortedKeys;
+
 @end
