@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Scott Moen. All rights reserved.
 //
 
-#import "TopPlacesTVC.h"
 #import "PhotosTVC.h"
 
 @interface RecentPhotosTVC : PhotosTVC

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Scott Moen. All rights reserved.
 //
 
-#import "TopPlacesTVC.h"
+#import "DictionaryTVC.h"
 
-@interface PhotosTVC : TopPlacesTVC
+@interface PhotosTVC : DictionaryTVC
 
 @property (strong, nonatomic) NSString *cellIdentifier;
 

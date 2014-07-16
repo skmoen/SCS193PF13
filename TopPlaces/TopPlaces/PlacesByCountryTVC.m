@@ -26,35 +26,36 @@
 {
     [self.refreshControl beginRefreshing]; // start the spinner
     dispatch_queue_t fetchQ = dispatch_queue_create("places by country", NULL);
-    dispatch_async(fetchQ, ^(void) {
+    dispatch_async(fetchQ, ^{
         NSData *jsonResults = [NSData dataWithContentsOfURL:[FlickrFetcher URLforTopPlaces]];
         NSDictionary *dictResults = [NSJSONSerialization JSONObjectWithData:jsonResults
                                                                     options:0
                                                                       error:NULL];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            for (NSDictionary *place in [dictResults valueForKeyPath:FLICKR_RESULTS_PLACES]) {
-                NSArray *placeParts = [[place valueForKeyPath:FLICKR_PLACE_NAME] componentsSeparatedByString:@", "];
-                NSString *country = [placeParts lastObject];
-                
-                NSMutableArray *placeList = [self.itemsBySection objectForKey:country];
-                if (!placeList) {
-                    placeList = [[NSMutableArray alloc] init];
-                    [self.itemsBySection setObject:placeList forKey:country];
-                }
-/*
-                NSUInteger index = [placeList indexOfObject:place
-                                              inSortedRange:{0,[placeList count]}
-                                                    options:NSBinarySearchingInsertionIndex
-                                            usingComparator:^(id lhs, id rhs) {
-                                                
-                                            }];
- */
-                [placeList addObject:place];
-#warning XXX sort place list right here
-            }
+        NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+        for (NSDictionary *place in [dictResults valueForKeyPath:FLICKR_RESULTS_PLACES]) {
+            NSArray *placeParts = [[place valueForKeyPath:FLICKR_PLACE_NAME] componentsSeparatedByString:@", "];
+            NSString *country = [placeParts lastObject];
             
-            [self.tableView reloadData];
+            NSMutableArray *placeList = [data objectForKey:country];
+            if (!placeList) {
+                placeList = [[NSMutableArray alloc] init];
+                [data setObject:placeList forKey:country];
+            }
+
+            NSUInteger index = [placeList indexOfObject:place
+                                          inSortedRange:NSMakeRange(0, [placeList count])
+                                                options:NSBinarySearchingInsertionIndex
+                                        usingComparator:^(id lhs, id rhs) {
+                                            NSString *left = [lhs valueForKeyPath:FLICKR_PLACE_NAME];
+                                            NSString *right = [rhs valueForKeyPath:FLICKR_PLACE_NAME];
+                                            return [left localizedCaseInsensitiveCompare:right];
+                                        }];
+            [placeList insertObject:place atIndex:index];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.tableData = data;
             [self.refreshControl endRefreshing];
         });
     });
@@ -73,7 +74,7 @@
 
 -(NSDictionary*)cityAtIndexPath:(NSIndexPath*)indexPath
 {
-    NSArray *cities = [self.itemsBySection objectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
+    NSArray *cities = [self.tableData objectForKey:[[self sortedKeys] objectAtIndex:indexPath.section]];
     return [cities objectAtIndex:indexPath.row];
 }
 

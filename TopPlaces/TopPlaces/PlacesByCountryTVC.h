@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Scott Moen. All rights reserved.
 //
 
-#import "TopPlacesTVC.h"
+#import "DictionaryTVC.h"
 
-@interface PlacesByCountryTVC : TopPlacesTVC
+@interface PlacesByCountryTVC : DictionaryTVC
 
 @end

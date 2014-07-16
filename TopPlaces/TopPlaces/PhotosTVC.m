@@ -22,7 +22,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentifier forIndexPath:indexPath];
     
-    NSDictionary *selected = [self.itemsBySection[@"photos"] objectAtIndex:indexPath.row];
+    NSDictionary *selected = [self.tableData[@"photos"] objectAtIndex:indexPath.row];
     
     NSString *title = [selected valueForKeyPath:FLICKR_PHOTO_TITLE];
     cell.textLabel.text = [title isEqualToString:@""] ? @"Unknown" : title;
@@ -37,7 +37,7 @@
     ImageViewController *ivc = [segue destinationViewController];
     if ([segue.identifier isEqualToString:@"Image"] && [ivc isKindOfClass:[ImageViewController class]]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        NSDictionary *selected = [self.itemsBySection[@"photos"] objectAtIndex:indexPath.row];
+        NSDictionary *selected = [self.tableData[@"photos"] objectAtIndex:indexPath.row];
         ivc.title = [selected valueForKeyPath:FLICKR_PHOTO_TITLE];
         ivc.imageURL = [FlickrFetcher URLforPhoto:selected format:FlickrPhotoFormatLarge];
     }

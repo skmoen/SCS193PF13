@@ -26,9 +26,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    self.itemsBySection[@"photos"] = [HistoryUserDefaults photoDefaults];
-    [self.tableView reloadData];
+
+    NSArray *historyPhotos = [HistoryUserDefaults photoDefaults];
+    if (historyPhotos) {
+        self.tableData = @{@"photos": historyPhotos};   
+    }
 }
 
 @end

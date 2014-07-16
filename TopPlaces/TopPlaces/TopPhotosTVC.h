@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import "TopPlacesTVC.h"
 #import "PhotosTVC.h"
 
 @interface TopPhotosTVC : PhotosTVC

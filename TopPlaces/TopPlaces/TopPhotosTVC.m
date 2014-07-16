@@ -38,8 +38,7 @@
                                                                     options:0
                                                                       error:NULL];
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.itemsBySection[@"photos"] = [dictResults valueForKeyPath:FLICKR_RESULTS_PHOTOS];
-            [self.tableView reloadData];
+            self.tableData = @{@"photos": [dictResults valueForKeyPath:FLICKR_RESULTS_PHOTOS]};
             [self.refreshControl endRefreshing];
         });
     });
@@ -55,7 +54,7 @@
     ImageViewController *ivc = [segue destinationViewController];
     if ([segue.identifier isEqualToString:@"Image"] && [ivc isKindOfClass:[ImageViewController class]]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        NSDictionary *selected = [self.itemsBySection[@"photos"] objectAtIndex:indexPath.row];
+        NSDictionary *selected = [self.tableData[@"photos"] objectAtIndex:indexPath.row];
         [HistoryUserDefaults addPhotoToDefaults:selected];
     }
 }
