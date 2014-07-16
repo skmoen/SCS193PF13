@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A164D4719764B27009C6D24 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A164D4519764B27009C6D24 /* Main_iPad.storyboard */; };
 		3A63587A19761DA0005F4AF7 /* DictionaryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63587919761DA0005F4AF7 /* DictionaryTVC.m */; };
 		79114416197244450005A5B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79114415197244450005A5B8 /* Foundation.framework */; };
 		79114418197244450005A5B8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79114417197244450005A5B8 /* CoreGraphics.framework */; };
@@ -14,7 +15,7 @@
 		79114420197244450005A5B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7911441E197244450005A5B8 /* InfoPlist.strings */; };
 		79114422197244450005A5B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79114421197244450005A5B8 /* main.m */; };
 		79114426197244450005A5B8 /* TopPlacesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79114425197244450005A5B8 /* TopPlacesAppDelegate.m */; };
-		79114429197244450005A5B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79114427197244450005A5B8 /* Main.storyboard */; };
+		79114429197244450005A5B8 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79114427197244450005A5B8 /* Main_iPhone.storyboard */; };
 		7911442E197244450005A5B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7911442D197244450005A5B8 /* Images.xcassets */; };
 		79114435197244450005A5B8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79114434197244450005A5B8 /* XCTest.framework */; };
 		79114436197244450005A5B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79114415197244450005A5B8 /* Foundation.framework */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A164D4619764B27009C6D24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TopPlaces/Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		3A63587819761DA0005F4AF7 /* DictionaryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionaryTVC.h; sourceTree = "<group>"; };
 		3A63587919761DA0005F4AF7 /* DictionaryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionaryTVC.m; sourceTree = "<group>"; };
 		79114412197244450005A5B8 /* TopPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,7 +55,7 @@
 		79114423197244450005A5B8 /* TopPlaces-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TopPlaces-Prefix.pch"; sourceTree = "<group>"; };
 		79114424197244450005A5B8 /* TopPlacesAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopPlacesAppDelegate.h; sourceTree = "<group>"; };
 		79114425197244450005A5B8 /* TopPlacesAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopPlacesAppDelegate.m; sourceTree = "<group>"; };
-		79114428197244450005A5B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		79114428197244450005A5B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		7911442D197244450005A5B8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		79114433197244450005A5B8 /* TopPlacesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TopPlacesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79114434197244450005A5B8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -134,7 +136,8 @@
 		7911441B197244450005A5B8 /* TopPlaces */ = {
 			isa = PBXGroup;
 			children = (
-				79114427197244450005A5B8 /* Main.storyboard */,
+				3A164D4519764B27009C6D24 /* Main_iPad.storyboard */,
+				79114427197244450005A5B8 /* Main_iPhone.storyboard */,
 				79EF4EFD1972E24400CE4B51 /* PlacesByCountryTVC.h */,
 				79EF4EFE1972E24400CE4B51 /* PlacesByCountryTVC.m */,
 				79EF4EF719726FC600CE4B51 /* TopPhotosTVC.h */,
@@ -275,8 +278,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7911442E197244450005A5B8 /* Images.xcassets in Resources */,
+				3A164D4719764B27009C6D24 /* Main_iPad.storyboard in Resources */,
 				79114420197244450005A5B8 /* InfoPlist.strings in Resources */,
-				79114429197244450005A5B8 /* Main.storyboard in Resources */,
+				79114429197244450005A5B8 /* Main_iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +331,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3A164D4519764B27009C6D24 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A164D4619764B27009C6D24 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		7911441E197244450005A5B8 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -335,12 +348,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		79114427197244450005A5B8 /* Main.storyboard */ = {
+		79114427197244450005A5B8 /* Main_iPhone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				79114428197244450005A5B8 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 		7911443D197244450005A5B8 /* InfoPlist.strings */ = {
@@ -432,7 +445,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TopPlaces/TopPlaces-Prefix.pch";
 				INFOPLIST_FILE = "TopPlaces/TopPlaces-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -445,7 +460,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TopPlaces/TopPlaces-Prefix.pch";
 				INFOPLIST_FILE = "TopPlaces/TopPlaces-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -69,6 +69,7 @@
     NSDictionary *city = [self cityAtIndexPath:indexPath];
     NSArray *cityParts = [[city valueForKeyPath:FLICKR_PLACE_NAME] componentsSeparatedByString:@", "];
     cell.textLabel.text = [cityParts firstObject];
+    cell.detailTextLabel.text = cityParts[1];
     return cell;
 }
 
@@ -81,11 +82,8 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     TopPhotosTVC *tptvc = [segue destinationViewController];
     if ([segue.identifier isEqualToString:@"Top Photos"] && [tptvc isKindOfClass:[TopPhotosTVC class]]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];

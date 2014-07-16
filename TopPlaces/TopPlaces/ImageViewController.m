@@ -1,9 +1,4 @@
 //
-//  ImageViewController.m
-//  Imaginarium
-//
-//  Created by CS193p Instructor.
-//  Copyright (c) 2013 Stanford University. All rights reserved.
 //
 
 #import "ImageViewController.h"
@@ -51,12 +46,17 @@
     self.imageView.image = image; // does not change the frame of the UIImageView
 
     // had to add these two lines in Shutterbug to fix a bug in "reusing" ImageViewController's MVC
-    self.scrollView.zoomScale = 1.0;
-    self.imageView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
-    
-    // self.scrollView could be nil on the next line if outlet-setting has not happened yet
-    self.scrollView.contentSize = self.image ? self.image.size : CGSizeZero;
+    //self.scrollView.zoomScale = 1.0;
+    if (self.image) {
+        CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
+        self.imageView.frame = frame;
+        
+        // self.scrollView could be nil on the next line if outlet-setting has not happened yet
+        self.scrollView.contentSize = self.image.size;
 
+        [self.scrollView zoomToRect:frame animated:YES];
+    }
+        
     [self.spinner stopAnimating];
 }
 
