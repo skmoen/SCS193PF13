@@ -39,6 +39,7 @@
         photo.photo_id = [info valueForKeyPath:FLICKR_PHOTO_ID];
         photo.title = [info valueForKeyPath:FLICKR_PHOTO_TITLE];
         photo.descr = [info valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
+        photo.imageURL = [[FlickrFetcher URLforPhoto:info format:FlickrPhotoFormatLarge] absoluteString];
         
         photo.photographer = [Photographer photographerWithName:[info valueForKeyPath:FLICKR_PHOTO_OWNER]
                                                       inContext:context];

@@ -2,7 +2,7 @@
 //  Photo.m
 //  TopRegions
 //
-//  Created by Scott Moen on 7/21/14.
+//  Created by Scott Moen on 7/22/14.
 //  Copyright (c) 2014 Scott Moen. All rights reserved.
 //
 
@@ -16,6 +16,8 @@
 @dynamic descr;
 @dynamic photo_id;
 @dynamic title;
+@dynamic imageURL;
+@dynamic lastViewed;
 @dynamic photographer;
 @dynamic place;
 
