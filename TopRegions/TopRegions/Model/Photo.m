@@ -18,6 +18,8 @@
 @dynamic title;
 @dynamic imageURL;
 @dynamic lastViewed;
+@dynamic thumbnail;
+@dynamic thumbURL;
 @dynamic photographer;
 @dynamic place;
 

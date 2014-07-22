@@ -40,6 +40,7 @@
         photo.title = [info valueForKeyPath:FLICKR_PHOTO_TITLE];
         photo.descr = [info valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
         photo.imageURL = [[FlickrFetcher URLforPhoto:info format:FlickrPhotoFormatLarge] absoluteString];
+        photo.thumbURL = [[FlickrFetcher URLforPhoto:info format:FlickrPhotoFormatSquare] absoluteString];
         
         photo.photographer = [Photographer photographerWithName:[info valueForKeyPath:FLICKR_PHOTO_OWNER]
                                                       inContext:context];
@@ -47,7 +48,7 @@
         photo.place = [Place placeWithId:[info valueForKeyPath:FLICKR_PHOTO_PLACE_ID] inContext:context];
         
         if (![photo.place.region.photographers containsObject:photo.photographer]) {
-            [photo.photographer addRegionsObject:photo.place.region];
+            [photo.place.region addPhotographersObject:photo.photographer];
             photo.place.region.photographerCount = @(photo.place.region.photographerCount.intValue + 1);
         }
     }

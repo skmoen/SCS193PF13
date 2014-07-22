@@ -37,6 +37,21 @@
     Photo *photo = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = photo.title;
     cell.detailTextLabel.text = photo.descr;
+
+    cell.imageView.image = nil;
+    if (photo.thumbnail) {
+        cell.imageView.image = [UIImage imageWithData:photo.thumbnail];
+    }
+    else {
+        dispatch_queue_t thumbQ = dispatch_queue_create("Thumbnail Queue", NULL);
+        dispatch_async(thumbQ, ^{
+            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:photo.thumbURL]];
+            photo.thumbnail = data;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [cell setNeedsLayout];
+            });
+        });
+    }
     return cell;
 }
 

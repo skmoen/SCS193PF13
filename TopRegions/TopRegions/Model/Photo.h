@@ -18,6 +18,8 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * imageURL;
 @property (nonatomic, retain) NSDate * lastViewed;
+@property (nonatomic, retain) NSData * thumbnail;
+@property (nonatomic, retain) NSString * thumbURL;
 @property (nonatomic, retain) Photographer *photographer;
 @property (nonatomic, retain) Place *place;
 
